@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2020_07_23_164848) do
+ActiveRecord::Schema.define(version: 2020_07_23_194339) do
 
   create_table "days", force: :cascade do |t|
     t.date "date"
@@ -77,6 +77,7 @@ ActiveRecord::Schema.define(version: 2020_07_23_164848) do
     t.string "username"
     t.string "email"
     t.string "password_digest"
+    t.string "uid"
   end
 
   create_table "workouts", force: :cascade do |t|

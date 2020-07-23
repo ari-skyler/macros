@@ -1,0 +1,12 @@
+<% @user.errors.full_messages.each do |msg| %>
+  <div class="alert alert-danger">
+    <%= msg %>
+  </div>
+<% end %>
+<%= form_for :user, url: '/signup' do |f| %>
+  <%= f.text_field :username %>
+  <%= f.email_field :email %>
+  <%= f.password_field :password %>
+  <%= f.password_field :password_confirmation %>
+  <%= f.submit %>
+<% end %>

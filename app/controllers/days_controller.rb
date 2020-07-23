@@ -3,6 +3,7 @@ class DaysController < ApplicationController
 
   def index
     @days = Day.all
+    @user = current_user
   end
 
   def show
