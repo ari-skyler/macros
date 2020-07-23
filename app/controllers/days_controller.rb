@@ -1,9 +1,8 @@
 class DaysController < ApplicationController
   before_action :set_day, only: [:show, :edit, :update, :destroy]
-
+  before_action :check_credentials
   def index
     @days = Day.all
-    @user = current_user
   end
 
   def show
@@ -36,5 +35,13 @@ class DaysController < ApplicationController
 
     def day_params
       params.fetch(:day, {})
+    end
+
+    def check_credentials
+      if logged_in?
+        @user = current_user
+      else
+        redirect_to '/login'
+      end
     end
 end
