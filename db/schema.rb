@@ -12,19 +12,20 @@
 
 ActiveRecord::Schema.define(version: 2020_07_23_164848) do
 
-  create_table "dates", force: :cascade do |t|
+  create_table "days", force: :cascade do |t|
     t.date "date"
     t.integer "user_id"
     t.integer "workout_id"
-    t.index ["user_id"], name: "index_dates_on_user_id"
-    t.index ["workout_id"], name: "index_dates_on_workout_id"
+    t.index ["user_id"], name: "index_days_on_user_id"
+    t.index ["workout_id"], name: "index_days_on_workout_id"
   end
 
-  create_table "dates_meals", id: false, force: :cascade do |t|
-    t.integer "date_id", null: false
+  create_table "days_meals", id: false, force: :cascade do |t|
+    t.integer "day_id", null: false
     t.integer "meal_id", null: false
-    t.index ["date_id"], name: "index_dates_meals_on_date_id"
-    t.index ["meal_id"], name: "index_dates_meals_on_meal_id"
+    t.string "meal_type"
+    t.index ["day_id"], name: "index_days_meals_on_day_id"
+    t.index ["meal_id"], name: "index_days_meals_on_meal_id"
   end
 
   create_table "exercises", force: :cascade do |t|
