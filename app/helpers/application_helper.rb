@@ -5,4 +5,7 @@ module ApplicationHelper
   def logged_in?
     !!current_user
   end
+  def belongs_to_current_user(item)
+    item.user == current_user
+  end
 end

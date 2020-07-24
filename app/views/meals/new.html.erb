@@ -1,0 +1,39 @@
+<% @meal.errors.full_messages.each do |msg| %>
+  <div class="alert alert-danger">
+    <%= msg %>
+  </div>
+<% end %>
+<ul id="ul-class">
+<%= form_for @meal do |f| %>
+  <li><%= f.text_field :name, placeholder: "Name" %></li>
+  <%= f.fields_for :ingredients_meals do |im| %>
+      <fieldset id="set-<%= im.index %>">
+        <li><%= im.number_field :servings %></li>
+        <%= im.fields_for :ingredient do  |i| %>
+          <li><%= i.text_field :name %></li>
+          <li><%= i.number_field :calories %></li>
+        <% end %>
+      </fieldset>
+  <% end %>
+  <button type="button" onclick="addFields()">Create New Ingredient</button>
+  <%= f.submit %>
+<% end %>
+</ul>
+
+<script type="text/javascript">
+  var lastSet = document.querySelector('#set-0')
+  function addFields() {
+    var set = lastSet
+    var id1 = parseInt(set.id.split("-")[1])
+    var set2 = set.cloneNode(true)
+    var id2 = id1 + 1
+    set2.id = "set-" + id2
+    set2.querySelectorAll('input').forEach((el) => {
+      el.name = el.name.replace(id1.toString(), id2.toString())
+      el.id = el.id.replace(id1.toString(), id2.toString())
+      el.value = null
+    })
+    set.after(set2)
+    lastSet = set2
+  }
+</script>

@@ -4,7 +4,8 @@ class DaysController < ApplicationController
   def index
     @days = Day.all
   end
-
+  def today
+  end
   def show
   end
 
