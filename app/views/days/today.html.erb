@@ -1,6 +1,12 @@
 <% @user.meals.each do |m| %>
-<%= m.name %>
-<% m.ingredients_meals.each do |i| %>
-<%= i.servings %>: <%= i.ingredient.name %>
-<% end %>
+  <%= m.name %>
+  <% m.ingredients_list.each do |i| %>
+    <%= i.servings %>: <%= i.name %><br>
+    calories: <%= i.calories %><br>
+    protein: <%= i.protein %><br>
+    carbs: <%= i.carbs %><br>
+    fat: <%= i.fat %><br>
+    fiber: <%= i.fiber %><br>
+    sugar: <%= i.sugar %><br>
+  <% end %>
 <% end %>
