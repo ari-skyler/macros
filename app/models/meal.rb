@@ -17,14 +17,14 @@ class Meal < ApplicationRecord
     end
   end
   def set_nutrition
-    hash = {}
+    hash = {:calories => 0, :fat => 0, :carbs => 0, :protein => 0, :fiber => 0, :sugar => 0}
     self.ingredients_list.each do |i|
-      hash[:calories] = i.calories * i.servings
-      hash[:fat] = i.fat * i.servings
-      hash[:carbs] = i.carbs * i.servings
-      hash[:protein] = i.protein * i.servings
-      hash[:fiber] = i.fiber * i.servings
-      hash[:sugar] = i.sugar * i.servings
+      hash[:calories] += i.calories * i.servings
+      hash[:fat] += i.fat * i.servings
+      hash[:carbs] += i.carbs * i.servings
+      hash[:protein] += i.protein * i.servings
+      hash[:fiber] += i.fiber * i.servings
+      hash[:sugar] += i.sugar * i.servings
     end
     self.nutrition = hash
   end

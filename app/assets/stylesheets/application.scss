@@ -21,9 +21,14 @@ fieldset{
 fieldset .row {
   margin: 10px 0px;
 }
-.new-meal{
+
+.meal{
   background-color: #eee;
   padding: 15px;
   border-radius: 5px;
   box-shadow: 0 1px 3px rgba(0,0,0,0.12), 0 1px 2px rgba(0,0,0,0.24);
+  width: 300px;
+}
+ul{
+  list-style: none;
 }

@@ -1,23 +1,46 @@
-<% @todays_meals.each do |m| %>
-  <p><%= m.name %></p>
-  <p>Calories: <%= m.nutrition[:calories] %></p>
-  <% m.ingredients_list.each_with_index do |i, index| %>
-    <p>
-      <%= pluralize i.servings, i.name %>
-      <button type="button" class="btn btn-link" id="btn-<%= index %>" onclick="showHide(<%= index %>)" name="button">Show More</button>
-    </p>
-    <div class="d-none" id="nutri-<%= index %>">
-      <ul>
-        <li>calories: <%= i.calories %></li>
-        <li>protein: <%= i.protein %></li>
-        <li>carbs: <%= i.carbs %></li>
-        <li>fat: <%= i.fat %></li>
-        <li>fiber: <%= i.fiber %></li>
-        <li>sugar: <%= i.sugar %></li>
-      </ul>
+<div class="container">
+  <div class="row bg-primary rounded-top">
+    <div class="col text-light p-2">
+      <h1>Today</h1>
     </div>
-  <% end %>
-<% end %>
+  </div>
+  <div class="row bg-light border-bottom-0 border border-top-0 border-primary">
+    <div class="col p-2">
+      <h2>Meals:</h2>
+    </div>
+  </div>
+  <div class="row rounded-bottom border border-top-0 border-primary">
+    <% @todays_meals.each_with_index do |m, index_1| %>
+      <div class="col-xs-12 col-md-4 col-lg-3">
+        <div class="card border-primary bg-light mb-3">
+          <div class="card-header">
+            <h3><%= m.name %></h3>
+            <p><b><%= m.nutrition[:calories] %> Cal</b></p>
+          </div>
+          <div class="card-body">
+            <% m.ingredients_list.each_with_index do |i, index_2| %>
+              <p>
+                <%= pluralize i.servings, i.name %><br>
+                <button type="button" class="btn btn-link" id="btn-<%= index_1 %>-<%= index_2 %>" onclick="showHide('<%= index_1 %>-<%= index_2 %>')" name="button">Show More</button>
+              </p>
+              <div class="d-none" id="nutri-<%= index_1 %>-<%= index_2 %>">
+                <ul>
+                  <li>calories: <%= i.calories %></li>
+                  <li>protein: <%= i.protein %></li>
+                  <li>carbs: <%= i.carbs %></li>
+                  <li>fat: <%= i.fat %></li>
+                  <li>fiber: <%= i.fiber %></li>
+                  <li>sugar: <%= i.sugar %></li>
+                </ul>
+              </div>
+            <% end %>
+          </div>
+        </div>
+      </div>
+    <% end %>
+  </div>
+</div>
+
 <script type="text/javascript">
   function showHide(id) {
     var el = document.getElementById('nutri-' + id)

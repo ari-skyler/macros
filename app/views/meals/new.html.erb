@@ -3,7 +3,7 @@
     <%= msg %>
   </div>
 <% end %>
-<div class="new-meal col-md-6 mx-auto">
+<div class="meal col-md-6 mx-auto">
   <h2>New Meal</h2>
   <%= form_for @meal do |f| %>
     <%= f.text_field :name, placeholder: 'Name', :class => 'form-control' %>
