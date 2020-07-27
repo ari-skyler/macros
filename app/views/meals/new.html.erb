@@ -1,44 +1,122 @@
 <% @meal.errors.full_messages.each do |msg| %>
-  <div class="alert alert-danger">
+  <div class='alert alert-danger'>
     <%= msg %>
   </div>
 <% end %>
-<ul id="ul-class">
-<%= form_for @meal do |f| %>
-  <li><%= f.text_field :name, placeholder: "Name" %></li>
-  <%= f.fields_for :ingredients_meals do |im| %>
-      <fieldset id="set-<%= im.index %>">
-        <li><%= im.number_field :servings, placeholder: 'Servings' %></li>
-        <%= im.fields_for :ingredient do  |i| %>
-          <li><%= i.text_field :name, placeholder: 'Name' %></li>
-          <li><%= i.number_field :calories, placeholder: 'Calories' %></li>
-          <li><%= i.number_field :protein, placeholder: 'Protein' %></li>
-          <li><%= i.number_field :carbs, placeholder: 'Carbs' %></li>
-          <li><%= i.number_field :fat, placeholder: 'Fat' %></li>
-          <li><%= i.number_field :fiber, placeholder: 'Fiber' %></li>
-          <li><%= i.number_field :sugar, placeholder: 'Sugar' %></li>
-        <% end %>
+<div class="new-meal col-md-6 mx-auto">
+  <h2>New Meal</h2>
+  <%= form_for @meal do |f| %>
+    <%= f.text_field :name, placeholder: 'Name', :class => 'form-control' %>
+    <br>
+    <h3>Ingredients</h3>
+    <%= f.fields_for :ingredients_meals do |im| %>
+      <fieldset id='set-<%= im.index %>' class='sets'>
+        <div class='row'>
+        <div class='col'>
+        <%= im.number_field :servings, placeholder: 'Servings', :class => 'form-control' %>
+        </div>
+        <div class='col choose-ingredient'>
+          <%= im.select :ingredient_id, options_from_collection_for_select(@ingredients, :id, :name), { :prompt => 'Select an Ingredient' }, :class => 'form-control' %>
+        </div>
+        </div>
+        <fieldset class='new-ingredient d-none form-group'>
+          <%= im.fields_for :ingredient do  |i| %>
+            <div class="row">
+              <p><b>New Ingredient</b></p>
+            </div>
+            <div class="row">
+              <div class="col"><%= i.text_field :name, placeholder: 'Name', :class => 'form-control' %></div>
+              <div class="col"><%= i.number_field :calories, placeholder: 'Calories', :class => 'form-control' %></div>
+              <div class="col"><%= i.number_field :protein, placeholder: 'Protein', :class => 'form-control' %></div>
+              </div>
+              <div class="row">
+              <div class="col"><%= i.number_field :carbs, placeholder: 'Carbs', :class => 'form-control' %></div>
+              <div class="col"><%= i.number_field :fat, placeholder: 'Fat', :class => 'form-control' %></div>
+              <div class="col"><%= i.number_field :fiber, placeholder: 'Fiber', :class => 'form-control' %></div>
+              <div class="col"><%= i.number_field :sugar, placeholder: 'Sugar', :class => 'form-control' %></div>
+            </div>
+          <% end %>
+        </fieldset>
+        <div class="form-group" >
+          <button type='button' class='btn btn-danger btn-sm d-none' id='removeButton' onclick='removeIngredient(<%= im.index %>)'>Remove Ingredient</button>
+        </div>
       </fieldset>
+    <% end %>
+    <div class="form-group">
+      <br>
+      <button type='button' class='btn btn-primary btn-sm' onclick='addIngredient(true)'>Create New Ingredient</button>
+      <button type='button' class='btn btn-primary btn-sm' onclick='addIngredient()'>Add New Ingredient</button>
+    </div>
+    <%= f.submit :class => 'btn btn-success' %>
   <% end %>
-  <button type="button" onclick="addFields()">Create New Ingredient</button>
-  <%= f.submit %>
-<% end %>
-</ul>
-
+</div>
 <script type="text/javascript">
-  var lastSet = document.querySelector('#set-0')
-  function addFields() {
-    var set = lastSet
-    var id1 = parseInt(set.id.split("-")[1])
-    var set2 = set.cloneNode(true)
-    var id2 = id1 + 1
-    set2.id = "set-" + id2
-    set2.querySelectorAll('input').forEach((el) => {
-      el.name = el.name.replace(id1.toString(), id2.toString())
-      el.id = el.id.replace(id1.toString(), id2.toString())
-      el.value = null
+  var firstSet = document.querySelector('#set-0')
+  var lastSet = '#set-0'
+  var flag = true
+  function addIngredient(newIngredient) {
+    var set = firstSet
+    var id1 = parseInt(lastSet.split("-")[1])
+    var set1Select = set.querySelector('select')
+    if (id1 === 0 && flag && newIngredient && set1Select.value == "") {
+      console.log(set1Select.value)
+      document.querySelector('.new-ingredient').classList.remove('d-none')
+      document.querySelector('.choose-ingredient').classList.add('d-none')
+      document.querySelector('#removeButton').classList.remove('d-none')
+      flag = false
+    } else {
+      var set2 = set.cloneNode(true)
+      var id2 = id1 + 1
+      set2.id = "set-" + id2
+      set2.querySelector('#removeButton').setAttribute('onClick', 'removeIngredient(' + id2 + ')')
+      if (newIngredient) {
+        set2.querySelector('.new-ingredient').classList.remove('d-none')
+        set2.querySelector('.choose-ingredient').remove()
+        updateIndex(set2, 'input', 0, id2)
+        set2.querySelector('#removeButton').classList.remove('d-none')
+      } else {
+        set2.querySelector('#removeButton').classList.remove('d-none')
+        chooseIngredient = set2.querySelector('.choose-ingredient')
+        chooseIngredient.classList.remove('d-none')
+        updateIndex(chooseIngredient, 'select', 0, id2)
+        updateIndex(set2, 'input', 0, id2)
+        set2.querySelector('.new-ingredient').remove()
+      }
+      document.getElementById('set-' + id1).after(set2)
+      lastSet = '#' + set2.id
+    }
+  }
+  function removeIngredient(index) {
+    el = document.getElementById('set-' + index)
+    if (index === 0) {
+      newIngredients = el.querySelector('.new-ingredient')
+      newIngredients.classList.add('d-none')
+      el.querySelector('.choose-ingredient').classList.remove('d-none')
+      el.querySelector('#removeButton').classList.add('d-none')
+      newIngredients.querySelectorAll('input').forEach((input) => {
+        input.value = ""
+      })
+
+      lastSet = '#' + el.id
+      flag = true
+    } else {
+      el.remove()
+      document.querySelectorAll('.sets').forEach((el, i) => {
+        var id = parseInt(el.id.split("-")[1])
+        el.id = 'set-' + i
+        updateIndex(el, 'select', id, i)
+        updateIndex(el, 'input', id, i)
+        el.querySelector('#removeButton').setAttribute('onClick', 'removeIngredient(' + i + ')')
+      })
+      var id = parseInt(lastSet.split("-")[1])
+      lastSet = '#set-' + (id - 1)
+    }
+  }
+  function updateIndex(parent, children, oldIndex, newIndex) {
+    parent.querySelectorAll(children).forEach((el) => {
+      el.name = el.name.replace(oldIndex.toString(), newIndex.toString())
+      el.id = el.id.replace(oldIndex.toString(), newIndex.toString())
+      if (oldIndex === 0) el.value = ""
     })
-    set.after(set2)
-    lastSet = set2
   }
 </script>

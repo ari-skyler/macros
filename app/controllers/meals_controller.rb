@@ -11,15 +11,21 @@ class MealsController < ApplicationController
   def new
     @meal = Meal.new
     @meal.ingredients_meals.build.build_ingredient
+    @ingredients = Ingredient.all
   end
 
   def edit
   end
 
   def create
-    meal = current_user.meals.build(meal_params)
+    day = Day.find_by(date: Date.today)
+    days_meal = day.days_meals.build
+    meal = Meal.new(meal_params)
+    days_meal.meal = meal
+    meal.user = current_user
     if meal.valid?
       meal.save
+      days_meal.save
       redirect_to '/today'
     else
       redirect_to new_meal_path
@@ -40,6 +46,11 @@ class MealsController < ApplicationController
     end
 
     def meal_params
-      params.require(:meal).permit(:user_id, :name, :descritpion, ingredients_meals_attributes: [:servings, ingredient_attributes: [:name, :calories]])
+      params.require(:meal).permit(:user_id, :name, :descritpion, ingredients_meals_attributes: [:servings, :ingredient_id, ingredient_attributes: [:name, :calories, :protein, :carbs, :fat, :fiber, :sugar]])
+    end
+
+    def delete_if_empty(hash, value)
+      byebug
+      hash.delete value if hash[value].any? &:empty?
     end
 end

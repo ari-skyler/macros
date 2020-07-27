@@ -3,7 +3,7 @@ class CreateDays < ActiveRecord::Migration[5.2]
     create_table :days do |t|
       t.date :date
       t.references :user
-      t.references :workout, foreign_key: true
+      t.references :workout
     end
   end
 end

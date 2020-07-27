@@ -1,12 +1,29 @@
-<% @user.meals.each do |m| %>
-  <%= m.name %>
-  <% m.ingredients_list.each do |i| %>
-    <%= i.servings %>: <%= i.name %><br>
-    calories: <%= i.calories %><br>
-    protein: <%= i.protein %><br>
-    carbs: <%= i.carbs %><br>
-    fat: <%= i.fat %><br>
-    fiber: <%= i.fiber %><br>
-    sugar: <%= i.sugar %><br>
+<% @todays_meals.each do |m| %>
+  <p><%= m.name %></p>
+  <p>Calories: <%= m.nutrition[:calories] %></p>
+  <% m.ingredients_list.each_with_index do |i, index| %>
+    <p>
+      <%= pluralize i.servings, i.name %>
+      <button type="button" class="btn btn-link" id="btn-<%= index %>" onclick="showHide(<%= index %>)" name="button">Show More</button>
+    </p>
+    <div class="d-none" id="nutri-<%= index %>">
+      <ul>
+        <li>calories: <%= i.calories %></li>
+        <li>protein: <%= i.protein %></li>
+        <li>carbs: <%= i.carbs %></li>
+        <li>fat: <%= i.fat %></li>
+        <li>fiber: <%= i.fiber %></li>
+        <li>sugar: <%= i.sugar %></li>
+      </ul>
+    </div>
   <% end %>
 <% end %>
+<script type="text/javascript">
+  function showHide(id) {
+    var el = document.getElementById('nutri-' + id)
+    el.classList.toggle('d-none')
+    var btn = document.getElementById('btn-' + id)
+    if (btn.innerText == "Show Less") btn.innerText = "Show More"
+    else btn.innerText = "Show Less"
+  }
+</script>
