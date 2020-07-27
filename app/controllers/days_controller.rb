@@ -1,12 +1,16 @@
 class DaysController < ApplicationController
   before_action :set_day, only: [:show, :edit, :update, :destroy]
   before_action :check_credentials
+  include DaysHelper
   def index
     @days = Day.all
   end
 
   def today
     @day = Day.find_or_create_by(date: Date.today, user_id: current_user.id)
+    @day.set_nutrition
+    @yesterday = Day.find_by(date: Date.yesterday, user_id: current_user.id)
+    @yesterday.set_nutrition
     @todays_meals = @day.meals.each do |m|
       m.set_ingredients_list
       m.set_nutrition

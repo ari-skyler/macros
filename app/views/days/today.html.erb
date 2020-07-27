@@ -6,6 +6,17 @@
   </div>
   <div class="row bg-light border-bottom-0 border border-top-0 border-primary">
     <div class="col p-2">
+      <h2>Overview:</h2>
+      <div class="card-group">
+        <div class="card card-body pb-1">
+          <p><b><%= @day.nutrition[:calories] %></b> (<%= nutri_delta @day.nutrition[:calories], @yesterday.nutrition[:calories] %>)</p>
+          <p><b><%= @yesterday.nutrition[:calories] %> Cal</b></p>
+        </div>
+      </div>
+    </div>
+  </div>
+  <div class="row bg-light border-bottom-0 border border-top-0 border-primary">
+    <div class="col p-2">
       <h2>Meals:</h2>
     </div>
   </div>
