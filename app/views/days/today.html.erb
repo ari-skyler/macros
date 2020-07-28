@@ -7,7 +7,7 @@
   <div class="row bg-light border-bottom-0 border border-top-0 border-primary">
     <div class="col p-2">
       <h2>Overview:</h2>
-      <div class="row rounded pb-3 pt-3 mx-auto bg-success text-light text-center mb-3">
+      <div class="row rounded pb-3 pt-3 mx-auto bg-success text-light text-center mb-3 mt-4">
         <div class="col">
           <h3>Calorie Goal: <%= current_user.nutrition[:calories] %> cal <%= nutri_delta @day.nutrition[:calories], current_user.nutrition[:calories] %></h3>
         </div>
@@ -36,16 +36,22 @@
       </div>
     </div>
   </div>
+  <div class="row bg-light border-bottom-0 border border-top-0 border-primary mb-0">
+    <div class="col my-auto p-2">
+      <h2>Workout:</h2>
+    </div>
+    <div class="col p-2 my-auto text-right">
+      <button type="button" class="btn btn-primary btn-sm" onclick="showHide('add-workout')">Add Exercise</button>
+    </div>
+  </div>
+  <div class="row bg-light border-bottom-0 border border-top-0 border-primary d-none" id="add-workout">
+    <div class="col p-2 my-auto text-right">
+      <a class="btn btn-primary text-light" href="/meals/new" role="button">Add</a>
+      <a class="btn btn-primary text-light" href="/meals/new" role="button">Create New Exercise</a>
+    </div>
+  </div>
   <div class="row bg-light border-bottom-0 border border-top-0 border-primary">
     <div class="col p-2">
-      <div class="row mx-auto">
-        <div class="col p-0 my-auto">
-          <h2>Workout:</h2>
-        </div>
-        <div class="col pb-2 my-auto p-0 text-right">
-          <a class="btn btn-primary text-light my-auto" href="/meals/new" role="button">Add Exercise</a>
-        </div>
-      </div>
       <div class="row border border-bottom-0 rounded-top pb-3 pt-3 mx-auto bg-light">
         <div class="col-8">
           <p class="my-auto"><b>Exercise</b></p>
@@ -78,7 +84,7 @@
   <div class="row bg-light border-bottom-0 border border-top-0 border-primary">
     <div class="col p-2">
       <h2>Nutrition Totals:</h2>
-      <div class="row border rounded-top pb-3 pt-3 mx-auto bg-light">
+      <div class="row border rounded-top pb-3 pt-3 mt-4 mx-auto bg-light">
         <div class="col-3 offset-3">
           <p class="my-auto"><b>Calories</b></p>
         </div>
@@ -95,16 +101,16 @@
           <p><b>Target:</b></p>
         </div>
         <div class="col-3 pt-3">
-          <p><b><%= @day.nutrition[:calories] %> Cal</b> <%= nutri_delta @day.nutrition[:calories], @yesterday.nutrition[:calories] %></p>
-          <p><b><%= current_user.nutrition[:calories] %> Cal</b> <%= nutri_delta current_user.nutrition[:calories], @day.nutrition[:calories] %></p>
+          <p><b><%= @day.nutrition[:calories] %> cal</b> <%= nutri_delta @day.nutrition[:calories], @yesterday.nutrition[:calories] %></p>
+          <p><b><%= current_user.nutrition[:calories] %> cal</b> <%= nutri_delta @day.nutrition[:calories], current_user.nutrition[:calories] %></p>
         </div>
         <div class="col-3 pt-3">
           <p><b><%= @day.nutrition[:protein] %> g</b> <%= nutri_delta @day.nutrition[:protein], @yesterday.nutrition[:protein] %></p>
-          <p><b><%= current_user.nutrition[:protein] %> Cal</b> <%= nutri_delta current_user.nutrition[:protein], @day.nutrition[:protein] %></p>
+          <p><b><%= current_user.nutrition[:protein] %> g</b> <%= nutri_delta @day.nutrition[:protein], current_user.nutrition[:protein] %></p>
         </div>
         <div class="col-3 pt-3">
           <p><b><%= @day.nutrition[:fat] %> g</b> <%= nutri_delta @day.nutrition[:fat], @yesterday.nutrition[:fat] %></p>
-          <p><b><%= current_user.nutrition[:fat] %> Cal</b> <%= nutri_delta current_user.nutrition[:fat], @day.nutrition[:fat] %></p>
+          <p><b><%= current_user.nutrition[:fat] %> g</b> <%= nutri_delta @day.nutrition[:fat], current_user.nutrition[:fat] %></p>
         </div>
       </div>
       <div class="row border border-bottom-0 pb-3 pt-3 mx-auto bg-light">
@@ -125,15 +131,15 @@
         </div>
         <div class="col-3 pt-3">
           <p><b><%= @day.nutrition[:carbs] %> g</b> <%= nutri_delta @day.nutrition[:carbs], @yesterday.nutrition[:carbs] %></p>
-          <p><b><%= current_user.nutrition[:carbs] %> Cal</b> <%= nutri_delta current_user.nutrition[:carbs], @day.nutrition[:carbs] %></p>
+          <p><b><%= current_user.nutrition[:carbs] %> g</b> <%= nutri_delta @day.nutrition[:carbs], current_user.nutrition[:carbs] %></p>
         </div>
         <div class="col-3 pt-3">
           <p><b><%= @day.nutrition[:fiber] %> g</b> <%= nutri_delta @day.nutrition[:fiber], @yesterday.nutrition[:fiber] %></p>
-          <p><b><%= current_user.nutrition[:fiber] %> Cal</b> <%= nutri_delta current_user.nutrition[:fiber], @day.nutrition[:fiber] %></p>
+          <p><b><%= current_user.nutrition[:fiber] %> g</b> <%= nutri_delta @day.nutrition[:fiber], current_user.nutrition[:fiber] %></p>
         </div>
         <div class="col-3 pt-3">
           <p><b><%= @day.nutrition[:sugar] %> g</b> <%= nutri_delta @day.nutrition[:sugar], @yesterday.nutrition[:sugar] %></p>
-          <p><b><%= current_user.nutrition[:sugar] %> Cal</b> <%= nutri_delta current_user.nutrition[:sugar], @day.nutrition[:sugar] %></p>
+          <p><b><%= current_user.nutrition[:sugar] %> g</b> <%= nutri_delta @day.nutrition[:sugar], current_user.nutrition[:sugar] %></p>
         </div>
       </div>
     </div>
@@ -143,12 +149,11 @@
       <h2>Meals:</h2>
     </div>
     <div class="col p-2 my-auto text-right">
-      <a class="btn btn-primary text-light" href="/meals/new" role="button">Add Meal</a>
+      <button type="button" class="btn btn-primary btn-sm" onclick="showHide('add-meal')">Add Meal</button>
     </div>
   </div>
-  <div class="row bg-light border-bottom-0 border border-top-0 border-primary">
+  <div class="row bg-light border-bottom-0 border border-top-0 border-primary d-none" id="add-meal">
     <div class="col p-2 my-auto text-right">
-
       <a class="btn btn-primary text-light" href="/meals/new" role="button">Add</a>
       <a class="btn btn-primary text-light" href="/meals/new" role="button">Create New Meal</a>
     </div>
@@ -211,7 +216,7 @@
                   </div>
                 </div>
               </div>
-              <button type="button" class="btn btn-link" id="btn-<%= index_1 %>-<%= index_2 %>" onclick="showHide('<%= index_1 %>-<%= index_2 %>')" name="button">Show More</button>
+              <button type="button" class="btn btn-link" id="btn-<%= index_1 %>-<%= index_2 %>" onclick="showHide('nutri-<%= index_1 %>-<%= index_2 %>')" name="button">Show More</button>
             <% end %>
           </div>
         </div>
@@ -222,10 +227,12 @@
 
 <script type="text/javascript">
   function showHide(id) {
-    var el = document.getElementById('nutri-' + id)
+    var el = document.getElementById(id)
     el.classList.toggle('d-none')
-    var btn = document.getElementById('btn-' + id)
-    if (btn.innerText == "Show Less") btn.innerText = "Show More"
-    else btn.innerText = "Show Less"
+    if (id != "add-meal" && id != "add-workout"){
+      var btn = document.getElementById(id.replace("nutri-", "btn-"))
+      if (btn.innerText == "Show Less") btn.innerText = "Show More"
+      else btn.innerText = "Show Less"
+    }
   }
 </script>
