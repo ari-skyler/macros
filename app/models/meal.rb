@@ -7,25 +7,31 @@ class Meal < ApplicationRecord
   accepts_nested_attributes_for :ingredients_meals
   validates :name, presence: true
   attr_accessor :nutrition, :ingredients_list
-  def set_ingredients_list
-    im = {}
-    self.ingredients_meals.each do |i|
-      im[i.ingredient_id] = i.servings
+  def ingredients_list
+    if @ingredients_list.nil?
+      im = {}
+      self.ingredients_meals.each do |i|
+        im[i.ingredient_id] = i.servings
+      end
+      @ingredients_list = self.ingredients.each do |i|
+        i.servings = im[i.id]
+      end
     end
-    self.ingredients_list = self.ingredients.each do |i|
-      i.servings = im[i.id]
-    end
+    @ingredients_list
   end
-  def set_nutrition
-    hash = {:calories => 0, :fat => 0, :carbs => 0, :protein => 0, :fiber => 0, :sugar => 0}
-    self.ingredients_list.each do |i|
-      hash[:calories] += i.calories * i.servings
-      hash[:fat] += i.fat * i.servings
-      hash[:carbs] += i.carbs * i.servings
-      hash[:protein] += i.protein * i.servings
-      hash[:fiber] += i.fiber * i.servings
-      hash[:sugar] += i.sugar * i.servings
+  def nutrition
+    if @nutrition.nil?
+      hash = {:calories => 0, :fat => 0, :carbs => 0, :protein => 0, :fiber => 0, :sugar => 0}
+      self.ingredients_list.each do |i|
+        hash[:calories] += i.calories * i.servings
+        hash[:fat] += i.fat * i.servings
+        hash[:carbs] += i.carbs * i.servings
+        hash[:protein] += i.protein * i.servings
+        hash[:fiber] += i.fiber * i.servings
+        hash[:sugar] += i.sugar * i.servings
+      end
+      @nutrition = hash
     end
-    self.nutrition = hash
+    @nutrition
   end
 end

@@ -7,12 +7,9 @@ class DaysController < ApplicationController
   end
 
   def today
-    @day = Day.find_or_create_by(date: Date.today, user_id: current_user.id)
+    @day = Day.find_or_create_by(date: Date.yesterday, user_id: current_user.id)
     @yesterday = Day.find_by(date: Date.yesterday, user_id: current_user.id)
-    @todays_meals = @day.meals.each do |m|
-      m.set_ingredients_list
-      m.set_nutrition
-    end
+    @todays_meals = @day.meals
   end
 
   def show

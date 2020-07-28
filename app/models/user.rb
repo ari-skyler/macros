@@ -24,15 +24,17 @@ class User < ApplicationRecord
     self.sugar_target = hash[:sugar] || (self.gender == "M" ? 36 : self.gender == "F" ? 25 : 30)
   end
   def nutrition
-    hash = {
-    :calories => self.calories_target,
-    :protein => self.protein_target,
-    :fat => self.fat_target,
-    :carbs => self.carbs_target,
-    :fiber => self.fiber_target,
-    :sugar => self.sugar_target
-    }
-    @nutrition = hash if @nutrition.nil?
+    if @nutrition.nil?
+      hash = {
+      :calories => self.calories_target,
+      :protein => self.protein_target,
+      :fat => self.fat_target,
+      :carbs => self.carbs_target,
+      :fiber => self.fiber_target,
+      :sugar => self.sugar_target
+      }
+      @nutrition = hash
+    end
     @nutrition
   end
 end

@@ -7,13 +7,13 @@ class Day < ApplicationRecord
   accepts_nested_attributes_for :days_meals
   attr_accessor :nutrition
   def nutrition
-    hash = {:calories => 0, :fat => 0, :carbs => 0, :protein => 0, :fiber => 0, :sugar => 0}
-    self.meals.each do |m|
-      m.set_ingredients_list
-      m.set_nutrition
-      hash = hash.merge(m.nutrition){|k, v, vv| v + vv}
+    if @nutrition.nil?
+      hash = {:calories => 0, :fat => 0, :carbs => 0, :protein => 0, :fiber => 0, :sugar => 0}
+      self.meals.each do |m|
+        hash = hash.merge(m.nutrition){|k, v, vv| v + vv}
+      end
+      @nutrition = hash
     end
-    self.nutrition = hash if self.nutrition.nil?
-    self.nutrition
+    @nutrition
   end
 end
