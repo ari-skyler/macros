@@ -6,7 +6,7 @@ class User < ApplicationRecord
   validates :gender, presence: true
   has_many :meals
   has_many :workouts
-  has_many :dates
+  has_many :days
   attr_reader :nutrition
   def self.omniauth_authenticate_or_create(auth)
     self.find_or_create_by(uid: auth['uid']) do |u|

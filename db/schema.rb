@@ -36,14 +36,6 @@ ActiveRecord::Schema.define(version: 2020_07_28_174332) do
     t.integer "calories_burned"
   end
 
-  create_table "exercises_workouts", id: false, force: :cascade do |t|
-    t.integer "workout_id", null: false
-    t.integer "exercise_id", null: false
-    t.integer "amount"
-    t.index ["exercise_id"], name: "index_exercises_workouts_on_exercise_id"
-    t.index ["workout_id"], name: "index_exercises_workouts_on_workout_id"
-  end
-
   create_table "ingredients", force: :cascade do |t|
     t.string "name"
     t.integer "calories"
@@ -91,8 +83,13 @@ ActiveRecord::Schema.define(version: 2020_07_28_174332) do
 
   create_table "workouts", force: :cascade do |t|
     t.integer "user_id"
+    t.integer "amount"
+    t.integer "day_id"
+    t.integer "exercise_id"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
+    t.index ["day_id"], name: "index_workouts_on_day_id"
+    t.index ["exercise_id"], name: "index_workouts_on_exercise_id"
     t.index ["user_id"], name: "index_workouts_on_user_id"
   end
 
