@@ -28,10 +28,10 @@
           <h3><%= @day.nutrition[:calories] %> cal</h3>
         </div>
         <div class="col-4">
-          <h3>0 cal</h3>
+          <h3><%= @day.calories_burned %> cal</h3>
         </div>
         <div class="col-4">
-          <h3><%= @day.nutrition[:calories] %> cal</h3>
+          <h3><%= @day.nutrition[:calories] - @day.calories_burned %> cal</h3>
         </div>
       </div>
     </div>
@@ -46,9 +46,8 @@
           <a class="btn btn-primary text-light my-auto" href="/meals/new" role="button">Add Exercise</a>
         </div>
       </div>
-
       <div class="row border border-bottom-0 rounded-top pb-3 pt-3 mx-auto bg-light">
-        <div class="col">
+        <div class="col-8">
           <p class="my-auto"><b>Exercise</b></p>
         </div>
         <div class="col my-auto">
@@ -58,19 +57,19 @@
           <p class="my-auto"><b>Calories Burned</b></p>
         </div>
       </div>
-      <!-- iterate exercises here -->
-      <div class="row border border-bottom-0 pb-3 pt-3 mx-auto bg-white">
-        <div class="col my-auto">
-          <h3>Biking</h3>
+      <% @day.workouts_list.each do |workout| %>
+        <div class="row border border-bottom-0 pb-3 pt-3 mx-auto bg-white">
+          <div class="col-8 my-auto">
+            <h3><%= workout.name %></h3>
+          </div>
+          <div class="col my-auto">
+            <p class="my-auto"><b><%= workout.amount %></b></p>
+          </div>
+          <div class="col text-right my-auto">
+            <p class="my-auto"><b><%= workout.calories_burned %> cal</b></p>
+          </div>
         </div>
-        <div class="col my-auto">
-          <p class="my-auto"><b>3 Miles</b></p>
-        </div>
-        <div class="col text-right my-auto">
-          <p class="my-auto"><b>120 cal</b></p>
-        </div>
-      </div>
-      <!-- end -->
+      <% end %>
       <div class="row rounded-bottom border border-top-0 pt-1 mx-auto bg-white">
       </div>
     </div>
@@ -149,7 +148,7 @@
   </div>
   <div class="row bg-light border-bottom-0 border border-top-0 border-primary">
     <div class="col p-2 my-auto text-right">
-      
+
       <a class="btn btn-primary text-light" href="/meals/new" role="button">Add</a>
       <a class="btn btn-primary text-light" href="/meals/new" role="button">Create New Meal</a>
     </div>
