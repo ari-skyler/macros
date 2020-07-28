@@ -9,7 +9,7 @@
       <h2>Overview:</h2>
       <div class="row rounded pb-3 pt-3 mx-auto bg-success text-light text-center mb-3 mt-4">
         <div class="col">
-          <h3>Calorie Goal: <%= current_user.nutrition[:calories] %> cal <%= nutri_delta @day.nutrition[:calories], current_user.nutrition[:calories] %></h3>
+          <h3>Calorie Goal: <%= current_user.nutrition[:calories] %> cal <%= nutri_delta @day.net_calories, current_user.nutrition[:calories] %></h3>
         </div>
       </div>
       <div class="row rounded-top pb-3 pt-3 mx-auto bg-primary text-light text-center">
@@ -31,7 +31,7 @@
           <h3><%= @day.calories_burned %> cal</h3>
         </div>
         <div class="col-4">
-          <h3><%= @day.nutrition[:calories] - @day.calories_burned %> cal</h3>
+          <h3><%= @day.net_calories %> cal</h3>
         </div>
       </div>
     </div>
@@ -46,8 +46,12 @@
   </div>
   <div class="row bg-light border-bottom-0 border border-top-0 border-primary d-none" id="add-workout">
     <div class="col p-2 my-auto text-right">
-      <a class="btn btn-primary text-light" href="/meals/new" role="button">Add</a>
-      <a class="btn btn-primary text-light" href="/meals/new" role="button">Create New Exercise</a>
+      <%= form_for @workout do |f| %>
+        <%= f.select :exercise_id, options_from_collection_for_select(@exercises, 'id', 'name' ), {}, :class => "form-control d-inline align-middle", :style => "width: auto"  %>
+        <%= f.number_field :amount, :placeholder => "reps/min", :class => "form-control align-middle d-inline", :style => "width:110px" %>
+        <%= f.submit "Add", :class => "btn btn-primary text-light my-auto" %>
+        <a class="btn btn-primary my-auto text-light" href="/exercises/new" role="button">Create New Exercise</a>
+      <% end %>
     </div>
   </div>
   <div class="row bg-light border-bottom-0 border border-top-0 border-primary">

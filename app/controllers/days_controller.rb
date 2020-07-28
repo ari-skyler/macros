@@ -12,6 +12,7 @@ class DaysController < ApplicationController
     @meals = current_user.meals
     @todays_meals = @day.meals
     @exercises = Exercise.all
+    @workout = current_user.workouts.new(day: @day)
   end
 
   def show

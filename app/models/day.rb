@@ -37,4 +37,7 @@ class Day < ApplicationRecord
     end
     @workouts_list
   end
+  def net_calories
+    self.nutrition[:calories] - self.calories_burned
+  end
 end
