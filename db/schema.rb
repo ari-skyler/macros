@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2020_07_28_170638) do
+ActiveRecord::Schema.define(version: 2020_07_28_174332) do
 
   create_table "days", force: :cascade do |t|
     t.date "date"
@@ -33,6 +33,7 @@ ActiveRecord::Schema.define(version: 2020_07_28_170638) do
     t.string "name"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
+    t.integer "calories_burned"
   end
 
   create_table "exercises_workouts", id: false, force: :cascade do |t|

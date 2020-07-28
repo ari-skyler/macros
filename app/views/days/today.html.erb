@@ -9,7 +9,7 @@
       <h2>Overview:</h2>
       <div class="row rounded pb-3 pt-3 mx-auto bg-success text-light text-center mb-3">
         <div class="col">
-          <h3>Calorie Goal: <%= current_user.nutrition[:calories] %> cal (<%= nutri_delta @day.nutrition[:calories], current_user.nutrition[:calories] %>)</h3>
+          <h3>Calorie Goal: <%= current_user.nutrition[:calories] %> cal <%= nutri_delta @day.nutrition[:calories], current_user.nutrition[:calories] %></h3>
         </div>
       </div>
       <div class="row rounded-top pb-3 pt-3 mx-auto bg-primary text-light text-center">
@@ -96,16 +96,16 @@
           <p><b>Target:</b></p>
         </div>
         <div class="col-3 pt-3">
-          <p><b><%= @day.nutrition[:calories] %> Cal</b> (<%= nutri_delta @day.nutrition[:calories], @yesterday.nutrition[:calories] %>)</p>
-          <p><b><%= current_user.nutrition[:calories] %> Cal</b></p>
+          <p><b><%= @day.nutrition[:calories] %> Cal</b> <%= nutri_delta @day.nutrition[:calories], @yesterday.nutrition[:calories] %></p>
+          <p><b><%= current_user.nutrition[:calories] %> Cal</b> <%= nutri_delta current_user.nutrition[:calories], @day.nutrition[:calories] %></p>
         </div>
         <div class="col-3 pt-3">
-          <p><b><%= @day.nutrition[:protein] %> g</b> (<%= nutri_delta @day.nutrition[:protein], @yesterday.nutrition[:protein] %>)</p>
-          <p><b><%= current_user.nutrition[:protein] %> g</b></p>
+          <p><b><%= @day.nutrition[:protein] %> g</b> <%= nutri_delta @day.nutrition[:protein], @yesterday.nutrition[:protein] %></p>
+          <p><b><%= current_user.nutrition[:protein] %> Cal</b> <%= nutri_delta current_user.nutrition[:protein], @day.nutrition[:protein] %></p>
         </div>
         <div class="col-3 pt-3">
-          <p><b><%= @day.nutrition[:fat] %> g</b> (<%= nutri_delta @day.nutrition[:fat], @yesterday.nutrition[:fat] %>)</p>
-          <p><b><%= current_user.nutrition[:fat] %> g</b></p>
+          <p><b><%= @day.nutrition[:fat] %> g</b> <%= nutri_delta @day.nutrition[:fat], @yesterday.nutrition[:fat] %></p>
+          <p><b><%= current_user.nutrition[:fat] %> Cal</b> <%= nutri_delta current_user.nutrition[:fat], @day.nutrition[:fat] %></p>
         </div>
       </div>
       <div class="row border border-bottom-0 pb-3 pt-3 mx-auto bg-light">
@@ -125,16 +125,16 @@
           <p><b>Target:</b></p>
         </div>
         <div class="col-3 pt-3">
-          <p><b><%= @day.nutrition[:carbs] %> g</b> (<%= nutri_delta @day.nutrition[:carbs], @yesterday.nutrition[:carbs] %>)</p>
-          <p><b><%= current_user.nutrition[:carbs] %> g</b></p>
+          <p><b><%= @day.nutrition[:carbs] %> g</b> <%= nutri_delta @day.nutrition[:carbs], @yesterday.nutrition[:carbs] %></p>
+          <p><b><%= current_user.nutrition[:carbs] %> Cal</b> <%= nutri_delta current_user.nutrition[:carbs], @day.nutrition[:carbs] %></p>
         </div>
         <div class="col-3 pt-3">
-          <p><b><%= @day.nutrition[:fiber] %> g</b> (<%= nutri_delta @day.nutrition[:fiber], @yesterday.nutrition[:fiber] %>)</p>
-          <p><b><%= current_user.nutrition[:fiber] %> g</b></p>
+          <p><b><%= @day.nutrition[:fiber] %> g</b> <%= nutri_delta @day.nutrition[:fiber], @yesterday.nutrition[:fiber] %></p>
+          <p><b><%= current_user.nutrition[:fiber] %> Cal</b> <%= nutri_delta current_user.nutrition[:fiber], @day.nutrition[:fiber] %></p>
         </div>
         <div class="col-3 pt-3">
-          <p><b><%= @day.nutrition[:sugar] %> g</b> (<%= nutri_delta @day.nutrition[:sugar], @yesterday.nutrition[:sugar] %>)</p>
-          <p><b><%= current_user.nutrition[:sugar] %> g</b></p>
+          <p><b><%= @day.nutrition[:sugar] %> g</b> <%= nutri_delta @day.nutrition[:sugar], @yesterday.nutrition[:sugar] %></p>
+          <p><b><%= current_user.nutrition[:sugar] %> Cal</b> <%= nutri_delta current_user.nutrition[:sugar], @day.nutrition[:sugar] %></p>
         </div>
       </div>
     </div>
