@@ -158,8 +158,11 @@
   </div>
   <div class="row bg-light border-bottom-0 border border-top-0 border-primary d-none" id="add-meal">
     <div class="col p-2 my-auto text-right">
-      <a class="btn btn-primary text-light" href="/meals/new" role="button">Add</a>
-      <a class="btn btn-primary text-light" href="/meals/new" role="button">Create New Meal</a>
+      <%= form_for @days_meal do |f| %>
+        <%= f.select :meal_id, options_from_collection_for_select(@meals, 'id', 'name' ), {}, :class => "form-control d-inline align-middle", :style => "width: auto"  %>
+        <%= f.submit "Add", :class => "btn btn-primary text-light my-auto" %>
+        <a class="btn btn-primary my-auto text-light" href="/meals/new" role="button">Create New Meal</a>
+      <% end %>
     </div>
   </div>
   <div class="row bg-light rounded-bottom border border-top-0 border-primary">
