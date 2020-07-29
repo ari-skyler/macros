@@ -7,8 +7,8 @@ class User < ApplicationRecord
 
   validates :email, presence: true, uniqueness: true
   validates :username, presence: true, uniqueness: true
-  validates :weight, presence: true
-  validates :gender, presence: true
+  #validates :weight, presence: true
+  #validates :gender, presence: true
 
   attr_reader :nutrition
 
@@ -28,7 +28,7 @@ class User < ApplicationRecord
     self.fiber_target = hash[:fiber] || 26
     self.sugar_target = hash[:sugar] || (self.gender == "M" ? 36 : self.gender == "F" ? 25 : 30)
   end
-  
+
   def nutrition
     if @nutrition.nil?
       hash = {

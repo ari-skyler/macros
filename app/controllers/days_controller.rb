@@ -2,7 +2,15 @@ class DaysController < ApplicationController
   before_action :check_credentials
   include DaysHelper
   def index
-    @days = Day.all
+    @days_calories = [
+    {name: "Goal", data: {}},
+    {name: "Actual", data: {}}
+    ]
+    @days = Day.where(user: current_user).limit(30).find_each do |day|
+      @days_calories[1][:data][day.date] = day.net_calories
+      @days_calories[0][:data][day.date] = current_user.nutrition[:calories]
+    end
+
   end
 
   def today
