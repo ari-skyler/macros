@@ -21,6 +21,8 @@
           </li>
           <li class="nav-item btn btn-light btn-sm my-auto">
             <%= link_to("Log Out", '/logout', method: 'delete', :class => "nav-link") if logged_in? %>
+            <%= link_to("Create Account", '/signup', :class => "nav-link") if !logged_in? && @on %>
+            <%= link_to("Log In", '/login', :class => "nav-link") if !logged_in? && !@on %>
           </li>
         </ul>
     </nav>

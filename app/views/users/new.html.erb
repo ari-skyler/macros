@@ -1,12 +1,26 @@
-<% @user.errors.full_messages.each do |msg| %>
-  <div class="alert alert-danger">
-    <%= msg %>
+<div class="card w-50 mx-auto">
+  <div class="card-header">
+    <h2>Sign Up</h2>
+    <% @user.errors.full_messages.each do |msg| %>
+      <div class="alert alert-danger">
+        <%= msg %>
+      </div>
+    <% end %>
   </div>
-<% end %>
-<%= form_for :user, url: '/signup' do |f| %>
-  <%= f.text_field :username %>
-  <%= f.email_field :email %>
-  <%= f.password_field :password %>
-  <%= f.password_field :password_confirmation %>
-  <%= f.submit %>
-<% end %>
+  <div class="card-body">
+    <%= form_for :user, url: '/signup' do |f| %>
+      <div class="form-group">
+        <%= f.text_field :username, :placeholder => "Username", :class => "form-control" %>
+      </div>
+      <div class="form-group">
+        <%= f.email_field :email, :placeholder => "Email", :class => "form-control" %>
+      </div>
+      <div class="form-group">
+        <%= f.password_field :password, :placeholder => "Password", :class => "form-control" %>
+      </div>
+      <div class="form-group">
+        <%= f.password_field :password_confirmation, :placeholder => "Confirm Password", :class => "form-control" %>
+      </div>
+      <%= link_to 'Sign up with Google!', '/auth/google_oauth2', :class => "btn btn-white border-primary" %>
+      <%= f.submit :class => "btn btn-primary" %>
+    <% end %>
