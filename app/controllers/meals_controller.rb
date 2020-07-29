@@ -1,20 +1,9 @@
 class MealsController < ApplicationController
-  before_action :set_meal, only: [:show, :edit, :update, :destroy]
-
-  def index
-    @meals = Meal.all
-  end
-
-  def show
-  end
 
   def new
     @meal = Meal.new
     @meal.ingredients_meals.build.build_ingredient
     @ingredients = Ingredient.all
-  end
-
-  def edit
   end
 
   def create
@@ -32,25 +21,9 @@ class MealsController < ApplicationController
     end
   end
 
-  def update
-
-  end
-
-  def destroy
-
-  end
 
   private
-    def set_meal
-      @meal = Meal.find(params[:id])
-    end
-
     def meal_params
       params.require(:meal).permit(:user_id, :name, :descritpion, ingredients_meals_attributes: [:servings, :ingredient_id, ingredient_attributes: [:name, :calories, :protein, :carbs, :fat, :fiber, :sugar]])
-    end
-
-    def delete_if_empty(hash, value)
-      byebug
-      hash.delete value if hash[value].any? &:empty?
     end
 end

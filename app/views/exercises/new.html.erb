@@ -1,0 +1,29 @@
+<div class="card mx-auto border-primary w-50">
+  <div class="card-header bg-primary text-light">
+    <h2>New Exercise</h2>
+  </div>
+  <div class="card-body">
+    <p>When creating a new exercise, the calories burned field should be filled in with the amount of calories burned in a rep or minute of the exercise. Example: if you burn 600 cal in a hour of jogging, you should put down 10 for calories burned.</p>
+    <%= form_for @exercise do |f| %>
+    <div class="form-group">
+      <%= f.fields_for :workouts do |w| %>
+        <%= w.number_field :amount, :placeholder => "Reps/Min", :class => "form-control" %>
+        <%= w.hidden_field :user_id %>
+        <%= w.hidden_field :day_id %>
+      <% end %>
+    </div>
+      <div class="form-group">
+        <%= f.text_field :name, :placeholder => "Exercise Name", :class => "form-control" %>
+      </div>
+      <div class="form-group">
+        <%= f.label :time_based %>
+        <span style="font-size:10px"> (Only select if this exercise is tracked in minutes instead of reps.)</span>
+        <%= f.check_box :time_based, :class => "form-check" %>
+      </div>
+      <div class="form-group">
+        <%= f.number_field :calories_burned, :placeholder => "Calories Burned", :class => "form-control", :step => "0.1" %>
+      </div>
+      <%= f.submit :class => "btn btn-success" %>
+    <% end %>
+  </div>
+</div>

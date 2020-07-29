@@ -1,5 +1,4 @@
 class DaysController < ApplicationController
-  before_action :set_day, only: [:show, :edit, :update, :destroy]
   before_action :check_credentials
   include DaysHelper
   def index
@@ -20,14 +19,6 @@ class DaysController < ApplicationController
   end
 
   private
-
-    def set_day
-      @day = Day.find(params[:id])
-    end
-
-    def day_params
-      params.fetch(:day, {})
-    end
 
     def check_credentials
       if logged_in?

@@ -1,37 +1,18 @@
 class ExercisesController < ApplicationController
-  before_action :set_exercise, only: [:show, :edit, :update, :destroy]
-
-  def index
-    @exercises = Exercise.all
-  end
-
-  def show
-  end
 
   def new
     @exercise = Exercise.new
-  end
-
-  def edit
+    @exercise.workouts.build(day: Day.find_by(date: Date.today, user: current_user), user: current_user)
   end
 
   def create
-
-  end
-
-  def update
-  end
-
-  def destroy
+    exercise = Exercise.create(exercise_params)
+    redirect_to '/today'
   end
 
   private
 
-    def set_exercise
-      @exercise = Exercise.find(params[:id])
-    end
-
     def exercise_params
-      params.require(:exercise).permit(:time_based, :name)
+      params.require(:exercise).permit(:time_based, :name, :calories_burned, workouts_attributes: [:amount, :user_id, :day_id])
     end
 end

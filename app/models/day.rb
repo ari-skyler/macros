@@ -4,9 +4,13 @@ class Day < ApplicationRecord
   has_many :meals, through: :days_meals
   has_many :workouts
   has_many :exercises, through: :workouts
+  
   validates :date, presence: true, uniqueness: true
+
   accepts_nested_attributes_for :days_meals
+
   attr_accessor :nutrition, :workouts_list
+
   def nutrition
     if @nutrition.nil?
       hash = {:calories => 0, :fat => 0, :carbs => 0, :protein => 0, :fiber => 0, :sugar => 0}
@@ -17,6 +21,7 @@ class Day < ApplicationRecord
     end
     @nutrition
   end
+
   def calories_burned
     total = 0
     self.workouts.each do |w|
@@ -24,6 +29,7 @@ class Day < ApplicationRecord
     end
     total
   end
+
   def workouts_list
     if @workouts_list.nil?
       hash = {}
@@ -37,6 +43,7 @@ class Day < ApplicationRecord
     end
     @workouts_list
   end
+
   def net_calories
     self.nutrition[:calories] - self.calories_burned
   end

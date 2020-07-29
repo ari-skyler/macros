@@ -4,9 +4,13 @@ class Meal < ApplicationRecord
   has_many :ingredients, through: :ingredients_meals
   has_many :days_meals
   has_many :days, through: :days_meals
+
   accepts_nested_attributes_for :ingredients_meals
+
   validates :name, presence: true
+  
   attr_accessor :nutrition, :ingredients_list
+
   def ingredients_list
     if @ingredients_list.nil?
       im = {}
@@ -19,6 +23,7 @@ class Meal < ApplicationRecord
     end
     @ingredients_list
   end
+
   def nutrition
     if @nutrition.nil?
       hash = {:calories => 0, :fat => 0, :carbs => 0, :protein => 0, :fiber => 0, :sugar => 0}

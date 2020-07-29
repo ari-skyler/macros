@@ -3,52 +3,56 @@
     <%= msg %>
   </div>
 <% end %>
-<div class="meal col-md-6 mx-auto">
-  <h2>New Meal</h2>
-  <%= form_for @meal do |f| %>
-    <%= f.text_field :name, placeholder: 'Name', :class => 'form-control' %>
-    <br>
-    <h3>Ingredients</h3>
-    <%= f.fields_for :ingredients_meals do |im| %>
-      <fieldset id='set-<%= im.index %>' class='sets'>
-        <div class='row'>
-        <div class='col'>
-        <%= im.number_field :servings, placeholder: 'Servings', :class => 'form-control' %>
-        </div>
-        <div class='col choose-ingredient'>
-          <%= im.select :ingredient_id, options_from_collection_for_select(@ingredients, :id, :name), { :prompt => 'Select an Ingredient' }, :class => 'form-control' %>
-        </div>
-        </div>
-        <fieldset class='new-ingredient d-none form-group'>
-          <%= im.fields_for :ingredient do  |i| %>
-            <div class="row">
-              <p><b>New Ingredient</b></p>
-            </div>
-            <div class="row">
-              <div class="col"><%= i.text_field :name, placeholder: 'Name', :class => 'form-control' %></div>
-              <div class="col"><%= i.number_field :calories, placeholder: 'Calories', :class => 'form-control' %></div>
-              <div class="col"><%= i.number_field :protein, placeholder: 'Protein', :class => 'form-control' %></div>
+<div class="card mx-auto border-primary w-75">
+  <div class="card-header bg-primary text-light">
+    <h2>New Meal</h2>
+  </div>
+  <div class="card-body">
+    <%= form_for @meal do |f| %>
+      <%= f.text_field :name, placeholder: 'Name', :class => 'form-control' %>
+      <br>
+      <h3>Ingredients</h3>
+      <%= f.fields_for :ingredients_meals do |im| %>
+        <fieldset id='set-<%= im.index %>' class='sets'>
+          <div class='row'>
+          <div class='col'>
+          <%= im.number_field :servings, placeholder: 'Servings', :class => 'form-control' %>
+          </div>
+          <div class='col choose-ingredient'>
+            <%= im.select :ingredient_id, options_from_collection_for_select(@ingredients, :id, :name), { :prompt => 'Select an Ingredient' }, :class => 'form-control' %>
+          </div>
+          </div>
+          <fieldset class='new-ingredient d-none form-group'>
+            <%= im.fields_for :ingredient do  |i| %>
+              <div class="row">
+                <p><b>New Ingredient</b></p>
               </div>
               <div class="row">
-              <div class="col"><%= i.number_field :carbs, placeholder: 'Carbs', :class => 'form-control' %></div>
-              <div class="col"><%= i.number_field :fat, placeholder: 'Fat', :class => 'form-control' %></div>
-              <div class="col"><%= i.number_field :fiber, placeholder: 'Fiber', :class => 'form-control' %></div>
-              <div class="col"><%= i.number_field :sugar, placeholder: 'Sugar', :class => 'form-control' %></div>
-            </div>
-          <% end %>
+                <div class="col"><%= i.text_field :name, placeholder: 'Name', :class => 'form-control' %></div>
+                <div class="col"><%= i.number_field :calories, placeholder: 'Calories', :class => 'form-control' %></div>
+                <div class="col"><%= i.number_field :protein, placeholder: 'Protein', :class => 'form-control' %></div>
+                </div>
+                <div class="row">
+                <div class="col"><%= i.number_field :carbs, placeholder: 'Carbs', :class => 'form-control' %></div>
+                <div class="col"><%= i.number_field :fat, placeholder: 'Fat', :class => 'form-control' %></div>
+                <div class="col"><%= i.number_field :fiber, placeholder: 'Fiber', :class => 'form-control' %></div>
+                <div class="col"><%= i.number_field :sugar, placeholder: 'Sugar', :class => 'form-control' %></div>
+              </div>
+            <% end %>
+          </fieldset>
+          <div class="form-group" >
+            <button type='button' class='btn btn-danger btn-sm d-none' id='removeButton' onclick='removeIngredient(<%= im.index %>)'>Remove Ingredient</button>
+          </div>
         </fieldset>
-        <div class="form-group" >
-          <button type='button' class='btn btn-danger btn-sm d-none' id='removeButton' onclick='removeIngredient(<%= im.index %>)'>Remove Ingredient</button>
-        </div>
-      </fieldset>
+      <% end %>
+      <div class="form-group">
+        <br>
+        <button type='button' class='btn btn-primary btn-sm' onclick='addIngredient(true)'>Create New Ingredient</button>
+        <button type='button' class='btn btn-primary btn-sm' onclick='addIngredient()'>Add New Ingredient</button>
+      </div>
+      <%= f.submit :class => 'btn btn-success' %>
     <% end %>
-    <div class="form-group">
-      <br>
-      <button type='button' class='btn btn-primary btn-sm' onclick='addIngredient(true)'>Create New Ingredient</button>
-      <button type='button' class='btn btn-primary btn-sm' onclick='addIngredient()'>Add New Ingredient</button>
-    </div>
-    <%= f.submit :class => 'btn btn-success' %>
-  <% end %>
+  </div>
 </div>
 <script type="text/javascript">
   var firstSet = document.querySelector('#set-0')
