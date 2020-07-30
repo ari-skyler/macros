@@ -12,7 +12,8 @@ w = 160
 28.times do
   Day.create(date: Date.new(2020, 7, i), user: user, weight: w)
   i +=1
-  w +=1 if i % 3
+  w +=1 if i % 3 == 0
+  w -=1 if i % 2 == 0
 end
 
 exercises = Exercise.create([

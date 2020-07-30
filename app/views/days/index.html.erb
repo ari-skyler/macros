@@ -17,12 +17,14 @@
     <%= line_chart @days_weight, adapter: "highcharts", id: 'weight-chart'  %>
   </div>
 </div>
-<div class="row bg-light border-bottom-0 border border-top-0 border-primary">
+<div class="row bg-light rounded-bottom border border-top-0 border-primary">
   <div class="col p-2">
     <h2>30 Day Nutrition Breakdown:</h2>
     <%= pie_chart @nutrition_breakdown, adapter: "highcharts", id: 'nutrition-pie-chart'  %>
   </div>
 </div>
+
+
 <script type="text/javascript">
   var options = {
     library: {
