@@ -15,7 +15,7 @@ class MealsController < ApplicationController
     if meal.valid?
       meal.save
       days_meal.save
-      redirect_to '/today'
+      redirect_to '/days/' + Date.today
     else
       redirect_to new_meal_path
     end

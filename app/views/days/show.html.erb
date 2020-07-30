@@ -164,7 +164,14 @@
     <% end %>
   </div>
 </div>
-<div class="row bg-light rounded-bottom border border-top-0 border-primary">
+<div class="row bg-light rounded-bottom border border-top-0 border-primary mb-3">
+  <% if @todays_meals.empty? %>
+    <div class="col p-4">
+      <div class="card text-center p-4">
+        <p class="my-auto">There are no Meals for this day.</p>
+      </div>
+    </div>
+  <% end %>
   <% @todays_meals.each_with_index do |m, index_1| %>
     <div class="col-xs-12 col-md-4 col-lg-3 pb-3 px-2">
       <div class="card border-primary bg-light mb-3 h-100">
