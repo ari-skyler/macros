@@ -2,11 +2,15 @@ class DaysController < ApplicationController
   before_action :check_credentials
   def index
     @days_calories = [{name: "Goal", data: {}}, {name: "Actual", data: {}}]
+    @days_weight = [{name: "Weight", data: {}}]
+    @nutrition_breakdown = {:fat => 0, :carbs => 0, :protein => 0, :fiber => 0, :sugar => 0}
     @days = Day.where(user: current_user).limit(30).find_each do |day|
       @days_calories[1][:data][day.date] = day.net_calories
       @days_calories[0][:data][day.date] = current_user.nutrition[:calories]
+      @days_weight[0][:data][day.date] = day.weight
+      @nutrition_breakdown = @nutrition_breakdown.merge(day.nutrition){|k, v, vv| v + vv if k != :calories}
     end
-
+    @nutrition_breakdown[:carbs] = @nutrition_breakdown[:carbs] - @nutrition_breakdown[:fiber] -@nutrition_breakdown[:sugar]
   end
 
   def show

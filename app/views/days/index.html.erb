@@ -1,18 +1,30 @@
 <div class="row bg-primary rounded-top">
   <div class="col text-light p-2">
     <h1>Dashboard</h1>
+    <p>30 Day Overview</p>
   </div>
 </div>
 <div class="row bg-light border-bottom-0 border border-top-0 border-primary">
   <div class="col p-2">
     <h2>Calories:</h2>
-    <%= line_chart @days_calories, adapter: "highcharts", id: 'calories-chart'  %>
+    <%= line_chart @days_calories, adapter: "highcharts", library: {min: 0,
+    max: 4000}, id: 'calories-chart'  %>
+  </div>
+</div>
+<div class="row bg-light border-bottom-0 border border-top-0 border-primary">
+  <div class="col p-2">
+    <h2>Weight:</h2>
+    <%= line_chart @days_weight, adapter: "highcharts", id: 'weight-chart'  %>
+  </div>
+</div>
+<div class="row bg-light border-bottom-0 border border-top-0 border-primary">
+  <div class="col p-2">
+    <h2>30 Day Nutrition Breakdown:</h2>
+    <%= pie_chart @nutrition_breakdown, adapter: "highcharts", id: 'nutrition-pie-chart'  %>
   </div>
 </div>
 <script type="text/javascript">
   var options = {
-    adapter: "highcharts",
-    id: 'calories-chart',
     library: {
       chart: {
         backgroundColor: "#f8f9fa"
@@ -32,11 +44,21 @@
         }
       }
     },
-    min: 0,
-    max: 4000,
     colors: ["#28a745", "#165baa"],
     points: false
   }
+  var pieOptions = {
+    library: {
+      chart: {
+        backgroundColor: "#f8f9fa"
+      }
+    },
+    colors: ["#28a745", "#165baa", "#dc3545", "#ffc107", "#17a2b8" ,"#563d7c"]
+  }
   var chart = Chartkick.charts["calories-chart"]
+  var chart2 = Chartkick.charts["weight-chart"]
+  var chart3 = Chartkick.charts["nutrition-pie-chart"]
   chart.setOptions(options)
+  chart2.setOptions(options)
+  chart3.setOptions(pieOptions)
 </script>
