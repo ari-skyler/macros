@@ -1,6 +1,5 @@
 class DaysController < ApplicationController
   before_action :check_credentials
-  include DaysHelper
   def index
     @days_calories = [
     {name: "Goal", data: {}},
