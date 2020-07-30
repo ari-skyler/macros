@@ -17,7 +17,7 @@
               <a class="nav-link text-light" href="/dashboard">Dashboard</a>
           </li>
           <li class="nav-item my-auto mr-3">
-            <a class="nav-link text-light" href="/today">Today</a>
+            <a class="nav-link text-light" href="/days/<%= Date.today %>">Today</a>
           </li>
           <li class="nav-item btn btn-light btn-sm my-auto">
             <%= link_to("Log Out", '/logout', method: 'delete', :class => "nav-link") if logged_in? %>

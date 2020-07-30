@@ -12,8 +12,8 @@ Rails.application.routes.draw do
   delete '/logout', to: 'sessions#destroy'
 
   get '/dashboard', to: 'days#index'
-  get '/today', to: 'days#today'
-  resources :days, only: [:show]
+  #get '/today', to: 'days#today'
+  get '/days/:date', to: 'days#show'
 
   resources :exercises, only: [:new, :create]
 

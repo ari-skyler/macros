@@ -13,9 +13,10 @@ class DaysController < ApplicationController
 
   end
 
-  def today
-    @day = Day.find_or_create_by(date: Date.today, user_id: current_user.id)
-    @yesterday = Day.find_by(date: Date.yesterday, user_id: current_user.id)
+  def show
+    date = params[:date].to_date
+    @day = Day.find_or_create_by(date: date, user_id: current_user.id)
+    @yesterday = Day.find_or_create_by(date: date - 1.day, user_id: current_user.id)
     @meals = current_user.meals
     @todays_meals = @day.meals.includes(ingredients_meals: [:ingredient])
     @exercises = Exercise.all
@@ -23,8 +24,6 @@ class DaysController < ApplicationController
     @days_meal = @day.days_meals.new
   end
 
-  def show
-  end
 
   private
 
