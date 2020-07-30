@@ -1,15 +1,14 @@
 class Day < ApplicationRecord
-  belongs_to :user, dependent: :destroy
+  belongs_to :user
   has_many :days_meals
   has_many :meals, through: :days_meals
   has_many :workouts
   has_many :exercises, through: :workouts
-  
+
   validates :date, presence: true, uniqueness: true
 
   accepts_nested_attributes_for :days_meals
 
-  attr_accessor :nutrition, :workouts_list
 
   def nutrition
     if @nutrition.nil?
@@ -45,6 +44,7 @@ class Day < ApplicationRecord
   end
 
   def net_calories
-    self.nutrition[:calories] - self.calories_burned
+    net = self.nutrition[:calories] - self.calories_burned
+    net > 0 ? net : 0
   end
 end

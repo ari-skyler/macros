@@ -3,6 +3,8 @@ Rails.application.routes.draw do
 
   get '/signup', to: 'users#new'
   post '/signup', to: 'users#create'
+  get '/setup', to: 'users#setup'
+  resources :users, only: [:update]
 
   get '/auth/google_oauth2/callback', to: 'sessions#omniauth'
   get '/login', to: 'sessions#new'
@@ -19,7 +21,7 @@ Rails.application.routes.draw do
 
   resources :ingredients, only: [:create]
 
-  resources :meals, only: [:new, :creeate]
+  resources :meals, only: [:new, :create]
 
   resources :days_meals, only: [:create]
 

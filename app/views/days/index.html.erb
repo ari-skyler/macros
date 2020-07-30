@@ -8,6 +8,6 @@
 <div class="row bg-light border-bottom-0 border border-top-0 border-primary">
   <div class="col p-2">
     <h2>Calories:</h2>
-    <%= line_chart @days_calories %>
+    <%= line_chart @days_calories, min: 0, max: 4000, colors: ["#28a745", "#165baa"], points: false %>
   </div>
 </div>
