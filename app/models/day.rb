@@ -26,7 +26,7 @@ class Day < ApplicationRecord
     self.workouts.each do |w|
       total += w.exercise.calories_burned * w.amount
     end
-    total
+    total.floor()
   end
 
   def workouts_list
@@ -37,7 +37,7 @@ class Day < ApplicationRecord
       end
       @workouts_list = self.exercises.each do |i|
         i.amount = hash[i.id]
-        i.calories_burned = hash[i.id] * i.calories_burned
+        i.calories_burned = (hash[i.id] * i.calories_burned).floor()
       end
     end
     @workouts_list
@@ -45,6 +45,6 @@ class Day < ApplicationRecord
 
   def net_calories
     net = self.nutrition[:calories] - self.calories_burned
-    net > 0 ? net : 0
+    net > 0 ? net.floor() : 0
   end
 end

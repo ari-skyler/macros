@@ -75,7 +75,7 @@
           <p class="my-auto"><b><%= workout.amount %></b></p>
         </div>
         <div class="col text-right my-auto">
-          <p class="my-auto"><b><%= workout.calories_burned %> cal</b></p>
+          <p class="my-auto"><b><%= workout.calories_burned.floor() %> cal</b></p>
         </div>
       </div>
     <% end %>
