@@ -7,8 +7,14 @@ class User < ApplicationRecord
 
   validates :email, presence: true, uniqueness: true
   validates :username, presence: true, uniqueness: true
-  #validates :weight, presence: true
-  #validates :gender, presence: true
+  validates :weight, presence: true, on: :update
+  validates :gender, presence: true, on: :update
+  validates :calories_target, presence: true, on: :update
+  validates :protein_target, presence: true, on: :update
+  validates :fat_target, presence: true, on: :update
+  validates :carbs_target, presence: true, on: :update
+  validates :fiber_target, presence: true, on: :update
+  validates :sugar_target, presence: true, on: :update
 
   attr_reader :nutrition
 

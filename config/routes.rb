@@ -4,7 +4,7 @@ Rails.application.routes.draw do
   get '/signup', to: 'users#new'
   post '/signup', to: 'users#create'
   get '/setup', to: 'users#setup'
-  post 'setup', to: 'users#update'
+  patch '/setup', to: 'users#update'
 
   get '/auth/google_oauth2/callback', to: 'sessions#omniauth'
   get '/login', to: 'sessions#new'

@@ -10,7 +10,7 @@ class SessionsController < ApplicationController
 
   def omniauth
     @user = User.omniauth_authenticate_or_create(auth)
-    if @user.valid? ? (login @user) : (r_login "Google Auth Failed")
+    @user.valid? ? (login @user) : (r_login "Google Auth Failed")
   end
 
   def destroy
@@ -35,5 +35,4 @@ class SessionsController < ApplicationController
       redirect_to '/setup'
     end
   end
-
 end
