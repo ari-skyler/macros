@@ -22,9 +22,8 @@ Rails.application.routes.draw do
   resources :ingredients, only: [:create]
 
   resources :meals, only: [:new, :create]
+  post '/days/:date/meals', to: 'days_meals#create'
   delete '/days/:date/meals/:meal_id', to: 'days_meals#destroy'
-
-  resources :days_meals, only: [:create]
 
   # For details on the DSL available within this file, see http://guides.rubyonrails.org/routing.html
 end
