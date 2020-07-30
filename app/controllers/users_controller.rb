@@ -4,7 +4,7 @@ class UsersController < ApplicationController
   end
   def setup
     @user = current_user
-    
+
   end
   def create
     @user = User.new(user_params)
@@ -13,6 +13,9 @@ class UsersController < ApplicationController
     else
       render :new
     end
+  end
+  def update
+    
   end
 
   private

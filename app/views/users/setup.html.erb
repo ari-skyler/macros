@@ -1,4 +1,4 @@
-<div class="card w-50 mx-auto">
+<div class="card mb-3 w-50 mx-auto">
   <div class="card-header">
     <h2>Set Up Your Account</h2>
     <% @user.errors.full_messages.each do |msg| %>
@@ -8,19 +8,93 @@
     <% end %>
   </div>
   <div class="card-body">
-    <%= form_for :user, url: '/signup' do |f| %>
+    <%= form_for @user, url: '/setup' do |f| %>
       <div class="form-group">
-        <%= f.text_field :username, :placeholder => "Username", :class => "form-control" %>
+        <%= f.select :gender, options_for_select(["M", "F"]), { :include_blank => "Sex" }, :class => "form-control" %>
       </div>
       <div class="form-group">
-        <%= f.email_field :email, :placeholder => "Email", :class => "form-control" %>
+        <div class="input-group">
+          <div class="input-group-prepend">
+            <span class="input-group-text"><b>Weight</b></span>
+          </div>
+          <%= f.number_field :weight, :class => "form-control text-right" %>
+          <div class="input-group-append">
+            <span class="input-group-text"><b>lbs</b></span>
+          </div>
+        </div>
       </div>
-      <div class="form-group">
-        <%= f.password_field :password, :placeholder => "Password", :class => "form-control" %>
+      <div class="card mb-3">
+        <div class="card-header bg-light">
+          <h4>Daily Nutrition Goals</h4>
+        </div>
+        <div class="card-body">
+          <div class="form-group">
+            <div class="input-group">
+              <div class="input-group-prepend">
+                <span class="input-group-text"><b>Calories</b></span>
+              </div>
+              <%= f.number_field :calories_target, :class => "form-control text-right" %>
+              <div class="input-group-append">
+                <span class="input-group-text"><b>cal</b></span>
+              </div>
+            </div>
+          </div>
+          <div class="form-group">
+            <div class="input-group">
+              <div class="input-group-prepend">
+                <span class="input-group-text"><b>Protein</b></span>
+              </div>
+              <%= f.number_field :protein_target, :class => "form-control text-right" %>
+              <div class="input-group-append">
+                <span class="input-group-text"><b>g</b></span>
+              </div>
+            </div>
+          </div>
+          <div class="form-group">
+            <div class="input-group">
+              <div class="input-group-prepend">
+                <span class="input-group-text"><b>Fat</b></span>
+              </div>
+              <%= f.number_field :fat_target, :class => "form-control text-right" %>
+              <div class="input-group-append">
+                <span class="input-group-text"><b>g</b></span>
+              </div>
+            </div>
+          </div>
+          <div class="form-group">
+            <div class="input-group">
+              <div class="input-group-prepend">
+                <span class="input-group-text"><b>Carbs</b></span>
+              </div>
+              <%= f.number_field :carbs_target, :class => "form-control text-right" %>
+              <div class="input-group-append">
+                <span class="input-group-text"><b>g</b></span>
+              </div>
+            </div>
+          </div>
+          <div class="form-group">
+            <div class="input-group">
+              <div class="input-group-prepend">
+                <span class="input-group-text"><b>Fiber</b></span>
+              </div>
+              <%= f.number_field :fiber_target, :class => "form-control text-right" %>
+              <div class="input-group-append">
+                <span class="input-group-text"><b>g</b></span>
+              </div>
+            </div>
+          </div>
+          <div class="form-group">
+            <div class="input-group">
+              <div class="input-group-prepend">
+                <span class="input-group-text"><b>Sugar</b></span>
+              </div>
+              <%= f.number_field :sugar_target, :class => "form-control text-right" %>
+              <div class="input-group-append">
+                <span class="input-group-text"><b>g</b></span>
+              </div>
+            </div>
+          </div>
+        </div>
       </div>
-      <div class="form-group">
-        <%= f.password_field :password_confirmation, :placeholder => "Confirm Password", :class => "form-control" %>
-      </div>
-      <%= link_to 'Sign up with Google!', '/auth/google_oauth2', :class => "btn btn-white border-primary" %>
-      <%= f.submit :class => "btn btn-primary" %>
+      <%= f.submit "Save", :class => "btn btn-primary" %>
     <% end %>

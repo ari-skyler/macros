@@ -22,7 +22,7 @@ class User < ApplicationRecord
 
   def nutrition=(hash)
     self.calories_target = hash[:calories] || 2000
-    self.protein_target = hash[:protein] || (1 * self.weight)
+    self.protein_target = hash[:protein] || self.weight
     self.fat_target = hash[:fat] || 50
     self.carbs_target = hash[:carbs] || 280
     self.fiber_target = hash[:fiber] || 26
