@@ -10,12 +10,13 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2020_07_29_195909) do
+ActiveRecord::Schema.define(version: 2020_07_30_195846) do
 
   create_table "days", force: :cascade do |t|
     t.date "date"
     t.integer "user_id"
     t.integer "workout_id"
+    t.integer "weight"
     t.index ["user_id"], name: "index_days_on_user_id"
     t.index ["workout_id"], name: "index_days_on_workout_id"
   end

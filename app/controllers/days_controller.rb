@@ -1,10 +1,7 @@
 class DaysController < ApplicationController
   before_action :check_credentials
   def index
-    @days_calories = [
-    {name: "Goal", data: {}},
-    {name: "Actual", data: {}}
-    ]
+    @days_calories = [{name: "Goal", data: {}}, {name: "Actual", data: {}}]
     @days = Day.where(user: current_user).limit(30).find_each do |day|
       @days_calories[1][:data][day.date] = day.net_calories
       @days_calories[0][:data][day.date] = current_user.nutrition[:calories]
