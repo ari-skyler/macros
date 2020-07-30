@@ -22,6 +22,7 @@ Rails.application.routes.draw do
   resources :ingredients, only: [:create]
 
   resources :meals, only: [:new, :create]
+  delete '/days/:date/meals/:meal_id', to: 'days_meals#destroy'
 
   resources :days_meals, only: [:create]
 

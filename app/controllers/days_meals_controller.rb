@@ -10,7 +10,12 @@ class DaysMealsController < ApplicationController
       redirect_to '/today'
     end
   end
-
+  def destroy
+    day = Day.find_by(date: params[:date], user: current_user)
+    meal = Meal.find(params[:meal_id])
+    day.meals.delete(meal.id)
+    redirect_to '/days/' + params[:date]
+  end
   private
 
     def days_meal_params

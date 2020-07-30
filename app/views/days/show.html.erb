@@ -232,6 +232,9 @@
             <button type="button" class="btn btn-link" id="btn-<%= index_1 %>-<%= index_2 %>" onclick="showHide('nutri-<%= index_1 %>-<%= index_2 %>')" name="button">Show More</button>
           <% end %>
         </div>
+        <div class="card-footer">
+          <%= link_to("Delete", "/days/#{@day.date}/meals/#{m.id}", method: 'delete', :class => "text-danger") %>
+        </div>
       </div>
     </div>
   <% end %>
