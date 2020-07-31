@@ -4,10 +4,11 @@ class MealsController < ApplicationController
     @meal = Meal.new
     @meal.ingredients_meals.build.build_ingredient
     @ingredients = Ingredient.all
+    @post_url = "/days/#{params[:date]}/meals"
   end
 
   def create
-    day = Day.find_by(date: Date.today)
+    day = Day.find_by(date: params[:date], user: current_user)
     days_meal = day.days_meals.build
     meal = Meal.new(meal_params)
     days_meal.meal = meal
@@ -15,7 +16,7 @@ class MealsController < ApplicationController
     if meal.valid?
       meal.save
       days_meal.save
-      redirect_to '/days/' + Date.today
+      redirect_to "/days/#{Date.today}"
     else
       redirect_to new_meal_path
     end

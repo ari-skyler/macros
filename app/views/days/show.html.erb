@@ -5,6 +5,11 @@
 </div>
 <div class="row bg-light border-bottom-0 border border-top-0 border-primary">
   <div class="col p-2">
+    <% flash.each do |type, msg| %>
+      <div class="alert alert-danger">
+        <%= msg %>
+      </div>
+    <% end %>
     <h2>Overview:</h2>
     <div class="row rounded pb-3 pt-3 mx-auto border border-success text-success text-center mb-3 mt-4">
       <div class="col">
@@ -45,7 +50,7 @@
 </div>
 <div class="row bg-light border-bottom-0 border border-top-0 border-primary d-none" id="add-workout">
   <div class="col p-2 my-auto text-right">
-    <%= form_for @workout do |f| %>
+    <%= form_for @workout, url: "/days/#{@day.date}/workouts" do |f| %>
       <%= f.select :exercise_id, options_from_collection_for_select(@exercises, 'id', 'name' ), {}, :class => "form-control d-inline align-middle", :style => "width: auto"  %>
       <%= f.number_field :amount, :placeholder => "reps/min", :class => "form-control align-middle d-inline", :style => "width:110px" %>
       <%= f.submit "Add", :class => "btn btn-primary text-light my-auto" %>
@@ -157,11 +162,14 @@
 </div>
 <div class="row bg-light border-bottom-0 border border-top-0 border-primary d-none" id="add-meal">
   <div class="col p-2 my-auto text-right">
-    <%= form_for @days_meal, url: "/days/#{@day.date}/meals" do |f| %>
+    <%= form_for @days_meal, url: "/days/#{@day.date}/days_meals" do |f| %>
       <%= f.select :meal_id, options_from_collection_for_select(@meals, 'id', 'name' ), {}, :class => "form-control d-inline align-middle", :style => "width: auto"  %>
       <%= f.submit "Add", :class => "btn btn-primary text-light my-auto" %>
-      <a class="btn btn-primary my-auto text-light" href="/meals/new" role="button">Create New Meal</a>
+      <a class="btn btn-primary my-auto text-light" href="/days/<%= @day.date %>/meals/new" role="button">Create New Meal</a>
     <% end %>
+    <div class="card bg-white p-3 m-3 border-info text-left">
+      <p class="my-auto">When adding a meal, if you are having extra food with it that isn't in the recipie, you should create a seperate 'snack' meal for those extra ingredients. If you edit a meal, it changes all past instances of that meal, so it's better to just make a new one if you plan to change the recipie.</p>
+    </div>
   </div>
 </div>
 <div class="row bg-light rounded-bottom border border-top-0 border-primary mb-3">

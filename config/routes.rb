@@ -17,12 +17,14 @@ Rails.application.routes.draw do
 
   resources :exercises, only: [:new, :create]
 
-  resources :workouts, only: [:create]
+  post '/days/:date/workouts', to: 'workouts#create'
 
   resources :ingredients, only: [:create]
 
   resources :meals, only: [:new, :create]
-  post '/days/:date/meals', to: 'days_meals#create'
+  post '/days/:date/days_meals', to: 'days_meals#create'
+  get '/days/:date/meals/new', to: 'meals#new'
+  post '/days/:date/meals', to: 'meals#create'
   delete '/days/:date/meals/:meal_id', to: 'days_meals#destroy'
 
   # For details on the DSL available within this file, see http://guides.rubyonrails.org/routing.html

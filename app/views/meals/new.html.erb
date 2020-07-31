@@ -8,7 +8,7 @@
     <h2>New Meal</h2>
   </div>
   <div class="card-body">
-    <%= form_for @meal do |f| %>
+    <%= form_for @meal, url: @post_url do |f| %>
       <%= f.text_field :name, placeholder: 'Name', :class => 'form-control' %>
       <br>
       <h3>Ingredients</h3>
