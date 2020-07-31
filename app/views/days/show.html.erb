@@ -54,7 +54,7 @@
       <%= f.select :exercise_id, options_from_collection_for_select(@exercises, 'id', 'name' ), {}, :class => "form-control d-inline align-middle", :style => "width: auto"  %>
       <%= f.number_field :amount, :placeholder => "reps/min", :class => "form-control align-middle d-inline", :style => "width:110px" %>
       <%= f.submit "Add", :class => "btn btn-primary text-light my-auto" %>
-      <a class="btn btn-primary my-auto text-light" href="/exercises/new" role="button">Create New Exercise</a>
+      <a class="btn btn-primary my-auto text-light" href="/days/<%= @day.date %>/exercises/new" role="button">Create New Exercise</a>
     <% end %>
   </div>
 </div>

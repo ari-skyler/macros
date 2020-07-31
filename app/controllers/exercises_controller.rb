@@ -2,12 +2,18 @@ class ExercisesController < ApplicationController
 
   def new
     @exercise = Exercise.new
-    @exercise.workouts.build(day: Day.find_by(date: Date.today, user: current_user), user: current_user)
+    @exercise.workouts.build(day: Day.find_by(date: params[:date], user: current_user), user: current_user)
   end
 
   def create
-    exercise = Exercise.create(exercise_params)
-    redirect_to '/today'
+    @exercise = Exercise.new(exercise_params)
+    day = Day.find(exercise_params[:workouts_attributes]["0"][:day_id])
+    if @exercise.valid?
+      @exercise.save
+      redirect_to '/days/' + day.date
+    else
+      render :new
+    end
   end
 
   private
