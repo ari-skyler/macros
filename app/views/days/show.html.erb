@@ -11,7 +11,7 @@
       </div>
     <% end %>
     <h2>Overview:</h2>
-    <div class="row rounded pb-3 pt-3 mx-auto border border-success text-success text-center mb-3 mt-4">
+    <div class="row rounded pb-3 pt-3 mx-auto border <%= change_color @day.net_calories, current_user.nutrition[:calories] %> text-center mb-3 mt-4">
       <div class="col">
         <h3><b>Calorie Goal: <%= current_user.nutrition[:calories] %> cal <%= nutri_delta @day.net_calories, current_user.nutrition[:calories] %></b></h3>
       </div>
