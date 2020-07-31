@@ -54,8 +54,8 @@ ActiveRecord::Schema.define(version: 2020_07_30_195846) do
     t.integer "meal_id", null: false
     t.integer "ingredient_id", null: false
     t.integer "servings"
-    t.index ["ingredient_id"], name: "index_ingredients_meals_on_ingredient_id"
-    t.index ["meal_id"], name: "index_ingredients_meals_on_meal_id"
+    t.index ["ingredient_id", "meal_id"], name: "index_ingredients_meals_on_ingredient_id_and_meal_id", unique: true
+    t.index ["meal_id", "ingredient_id"], name: "index_ingredients_meals_on_meal_id_and_ingredient_id", unique: true
   end
 
   create_table "meals", force: :cascade do |t|

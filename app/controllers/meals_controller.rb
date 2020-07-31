@@ -34,6 +34,19 @@ class MealsController < ApplicationController
     @post_url = "/meals/#{params[:id]}"
   end
 
+  def update
+    @meal = Meal.find(params[:id])
+    @ingredients = Ingredient.all
+    @post_url = "/meals/#{params[:id]}"
+    @meal.assign_attributes(meal_params)
+    if @meal.valid?
+      @meal.save
+      redirect_to meals_path
+    else
+      render :edit
+    end
+  end
+
   def destroy
     Meal.destroy(params[:id])
     redirect_to meals_path

@@ -41,7 +41,7 @@
             <% end %>
           </fieldset>
           <div class="form-group" >
-            <button type='button' class='btn btn-danger btn-sm' id='removeButton' onclick='removeIngredient(<%= im.index %>)'>Remove Ingredient</button>
+            <%= link_to("Delete", "/meals/#{@meal.id}/ingredients/#{@meal.ingredients[im.index].id}", method: 'delete', :class => "btn btn-danger btn-sm") %>
           </div>
           <script type="text/javascript">
             var lastSet = "#set-<%= im.index %>"
@@ -60,6 +60,7 @@
 <script type="text/javascript">
   var firstSet = document.querySelector('#set-0')
   var flag = false
+  var lastSet = lastSet || "#set-0"
   function addIngredient(newIngredient) {
     var set = firstSet
     var id1 = parseInt(lastSet.split("-")[1])
@@ -74,14 +75,11 @@
       var set2 = set.cloneNode(true)
       var id2 = id1 + 1
       set2.id = "set-" + id2
-      set2.querySelector('#removeButton').setAttribute('onClick', 'removeIngredient(' + id2 + ')')
       if (newIngredient) {
         set2.querySelector('.new-ingredient').classList.remove('d-none')
         set2.querySelector('.choose-ingredient').remove()
         updateIndex(set2, 'input', 0, id2)
-        set2.querySelector('#removeButton').classList.remove('d-none')
       } else {
-        set2.querySelector('#removeButton').classList.remove('d-none')
         chooseIngredient = set2.querySelector('.choose-ingredient')
         chooseIngredient.classList.remove('d-none')
         updateIndex(chooseIngredient, 'select', 0, id2)
@@ -90,32 +88,6 @@
       }
       document.getElementById('set-' + id1).after(set2)
       lastSet = '#' + set2.id
-    }
-  }
-  function removeIngredient(index) {
-    el = document.getElementById('set-' + index)
-    if (index === 0) {
-      newIngredients = el.querySelector('.new-ingredient')
-      newIngredients.classList.add('d-none')
-      el.querySelector('.choose-ingredient').classList.remove('d-none')
-      el.querySelector('#removeButton').classList.add('d-none')
-      newIngredients.querySelectorAll('input').forEach((input) => {
-        input.value = ""
-      })
-
-      lastSet = '#' + el.id
-      flag = true
-    } else {
-      el.remove()
-      document.querySelectorAll('.sets').forEach((el, i) => {
-        var id = parseInt(el.id.split("-")[1])
-        el.id = 'set-' + i
-        updateIndex(el, 'select', id, i)
-        updateIndex(el, 'input', id, i)
-        el.querySelector('#removeButton').setAttribute('onClick', 'removeIngredient(' + i + ')')
-      })
-      var id = parseInt(lastSet.split("-")[1])
-      lastSet = '#set-' + (id - 1)
     }
   }
   function updateIndex(parent, children, oldIndex, newIndex) {

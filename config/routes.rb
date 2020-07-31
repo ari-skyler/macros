@@ -22,12 +22,15 @@ Rails.application.routes.draw do
 
   resources :ingredients, only: [:create]
 
+  delete '/meals/:meal_id/ingredients/:ingredient_id', to: 'ingredients_meals#destroy'
+
   resources :meals, only: [:new, :index]
   get '/days/:date/meals/new', to: 'meals#new'
   post '/days/:date/meals', to: 'meals#create'
   get '/meals/:id/edit', to: 'meals#edit'
-  patch '/meals/:id', to: 'meals#update'
+  #patch '/meals/:id', to: 'meals#update'
   delete 'meals/:id', to: 'meals#destroy'
+
   post '/days/:date/days_meals', to: 'days_meals#create'
   delete '/days/:date/meals/:meal_id', to: 'days_meals#destroy'
 
