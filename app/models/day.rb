@@ -5,7 +5,7 @@ class Day < ApplicationRecord
   has_many :workouts
   has_many :exercises, through: :workouts
 
-  validates :date, presence: true, uniqueness: true
+  validates :date, presence: true, uniqueness: {scope: :user}
 
   accepts_nested_attributes_for :days_meals
 
