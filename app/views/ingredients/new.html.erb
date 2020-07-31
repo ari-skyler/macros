@@ -1,0 +1,84 @@
+<div class="card mx-auto border-primary w-50">
+  <div class="card-header bg-primary text-light">
+    <h2>New Ingredient</h2>
+  </div>
+  <div class="card-body">
+    <% @ingredient.errors.full_messages.each do |msg| %>
+      <div class="alert alert-danger">
+        <%= msg %>
+      </div>
+    <% end %>
+    <%= form_for @ingredient do |f| %>
+      <div class="form-group">
+        <%= f.text_field :name, :placeholder => "Ingredient Name", :class => "form-control" %>
+      </div>
+      <div class="form-group">
+        <div class="input-group has-error">
+          <div class="input-group-prepend">
+            <span class="input-group-text"><b>Calories</b></span>
+          </div>
+          <%= f.number_field :calories, :class => "form-control text-right" %>
+          <div class="input-group-append">
+            <span class="input-group-text"><b>cal</b></span>
+          </div>
+        </div>
+      </div>
+      <div class="form-group">
+        <div class="input-group has-error">
+          <div class="input-group-prepend">
+            <span class="input-group-text"><b>Protein</b></span>
+          </div>
+          <%= f.number_field :protein, :class => "form-control text-right" %>
+          <div class="input-group-append">
+            <span class="input-group-text"><b>g</b></span>
+          </div>
+        </div>
+      </div>
+      <div class="form-group">
+        <div class="input-group has-error">
+          <div class="input-group-prepend">
+            <span class="input-group-text"><b>Fat</b></span>
+          </div>
+          <%= f.number_field :fat, :class => "form-control text-right" %>
+          <div class="input-group-append">
+            <span class="input-group-text"><b>g</b></span>
+          </div>
+        </div>
+      </div>
+      <div class="form-group">
+        <div class="input-group has-error">
+          <div class="input-group-prepend">
+            <span class="input-group-text"><b>Carbs</b></span>
+          </div>
+          <%= f.number_field :carbs, :class => "form-control text-right" %>
+          <div class="input-group-append">
+            <span class="input-group-text"><b>g</b></span>
+          </div>
+        </div>
+      </div>
+      <div class="form-group">
+        <div class="input-group has-error">
+          <div class="input-group-prepend">
+            <span class="input-group-text"><b>Fiber</b></span>
+          </div>
+          <%= f.number_field :fiber, :class => "form-control text-right" %>
+          <div class="input-group-append">
+            <span class="input-group-text"><b>g</b></span>
+          </div>
+        </div>
+      </div>
+      <div class="form-group">
+        <div class="input-group has-error">
+          <div class="input-group-prepend">
+            <span class="input-group-text"><b>Sugar</b></span>
+          </div>
+          <%= f.number_field :sugar, :class => "form-control text-right" %>
+          <div class="input-group-append">
+            <span class="input-group-text"><b>g</b></span>
+          </div>
+        </div>
+      </div>
+      <%= f.submit :class => "btn btn-success" %>
+    <% end %>
+  </div>
+</div>

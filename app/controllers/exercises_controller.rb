@@ -22,7 +22,8 @@ class ExercisesController < ApplicationController
     @exercise = Exercise.find(params[:id])
   end
   def update
-    @exercise = Exercise.new(exercise_params)
+    @exercise = Exercise.find(params[:id])
+    @exercise.assign_attributes(exercise_params)
     if @exercise.valid?
       @exercise.save
       redirect_to exercises_path
