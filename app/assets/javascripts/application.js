@@ -14,5 +14,8 @@
 //= require activestorage
 //= require turbolinks
 //= require_tree .
+//= require popper
+//= require jquery
+//= require bootstrap
 //= require chartkick
 //= require highcharts

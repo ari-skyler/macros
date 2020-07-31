@@ -12,7 +12,6 @@ Rails.application.routes.draw do
   delete '/logout', to: 'sessions#destroy'
 
   get '/dashboard', to: 'days#index'
-  #get '/today', to: 'days#today'
   get '/days/:date', to: 'days#show'
 
   resources :exercises, only: [:create]
@@ -23,7 +22,7 @@ Rails.application.routes.draw do
 
   resources :ingredients, only: [:create]
 
-  resources :meals, only: [:new, :create]
+  resources :meals, only: [:new, :index]
   post '/days/:date/days_meals', to: 'days_meals#create'
   get '/days/:date/meals/new', to: 'meals#new'
   post '/days/:date/meals', to: 'meals#create'
