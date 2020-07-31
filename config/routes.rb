@@ -15,7 +15,7 @@ Rails.application.routes.draw do
   get '/days/:date', to: 'days#show'
   resources :days, only: [:update]
 
-  resources :exercises, only: [:index, :create]
+  resources :exercises, only: [:index, :create, :destroy]
   get '/days/:date/exercises/new', to: 'exercises#new'
 
   post '/days/:date/workouts', to: 'workouts#create'

@@ -55,7 +55,7 @@ class Day < ApplicationRecord
     days = Day.where(user: current_user).order('date DESC').limit(30).each do |day|
       days_calories[1][:data][day.date] = day.net_calories || 0
       days_calories[0][:data][day.date] = current_user.nutrition[:calories] || 0
-      days_weight[0][:data][day.date] = day.weight || days_weight[0][:data][(day.date - 1.day)]
+      days_weight[0][:data][day.date] = day.weight || current_user.weight
       nutrition_breakdown = nutrition_breakdown.merge(day.nutrition){|k, v, vv| v + vv if k != :calories}
     end
     nutrition_breakdown[:carbs] = nutrition_breakdown[:carbs] - nutrition_breakdown[:fiber] - nutrition_breakdown[:sugar]
