@@ -75,6 +75,7 @@
       <div class="row border border-bottom-0 pb-3 pt-3 mx-auto bg-white">
         <div class="col-8 my-auto">
           <h3><%= workout.name %></h3>
+          <%= link_to("Delete", "/days/#{@day.date}/workouts/#{workout.id}", method: 'delete', :class => "text-danger") %>
         </div>
         <div class="col my-auto">
           <p class="my-auto"><b><%= workout.amount %></b></p>

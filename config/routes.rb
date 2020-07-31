@@ -19,6 +19,7 @@ Rails.application.routes.draw do
   get '/days/:date/exercises/new', to: 'exercises#new'
 
   post '/days/:date/workouts', to: 'workouts#create'
+  delete '/days/:date/workouts/:workout_id', to: 'workouts#destroy'
 
   resources :ingredients, only: [:create]
 
