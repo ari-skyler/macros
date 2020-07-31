@@ -47,4 +47,18 @@ class Day < ApplicationRecord
     net = self.nutrition[:calories] - self.calories_burned
     net > 0 ? net.floor() : 0
   end
+
+  def self.thirty_day_overview(current_user)
+    days_calories = [{name: "Goal", data: {}}, {name: "Actual", data: {}}]
+    days_weight = [{name: "Weight", data: {}}]
+    nutrition_breakdown = {:fat => 0, :carbs => 0, :protein => 0, :fiber => 0, :sugar => 0}
+    days = Day.where(user: current_user).order('date DESC').limit(30).each do |day|
+      days_calories[1][:data][day.date] = day.net_calories || 0
+      days_calories[0][:data][day.date] = current_user.nutrition[:calories] || 0
+      days_weight[0][:data][day.date] = day.weight || days_weight[0][:data][(day.date - 1.day)]
+      nutrition_breakdown = nutrition_breakdown.merge(day.nutrition){|k, v, vv| v + vv if k != :calories}
+    end
+    nutrition_breakdown[:carbs] = nutrition_breakdown[:carbs] - nutrition_breakdown[:fiber] - nutrition_breakdown[:sugar]
+    {:days_calories => days_calories, :days_weight => days_weight, :nutrition_breakdown => nutrition_breakdown}
+  end
 end
