@@ -24,6 +24,12 @@ class DaysController < ApplicationController
     @days_meal = @day.days_meals.new
   end
 
+  def update
+    day = Day.find(params[:id])
+    day.weight = params[:day][:weight]
+    day.save
+    redirect_to "/days/#{day.date}"
+  end
 
   private
 

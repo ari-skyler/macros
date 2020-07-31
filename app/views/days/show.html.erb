@@ -16,6 +16,22 @@
         <h3><b>Calorie Goal: <%= current_user.nutrition[:calories] %> cal <%= nutri_delta @day.net_calories, current_user.nutrition[:calories] %></b></h3>
       </div>
     </div>
+    <div class="row rounded pb-3 pt-3 mx-auto border bg-white text-success text-center mb-3 mt-4">
+      <div class="col">
+        <% if @day.weight %>
+          <h4><b>Weight: <%= @day.weight %> lbs</b></h4>
+        <% else %>
+          <%= form_for @day do |f| %>
+          <div class="input-group">
+            <%= f.number_field :weight, :placeholder => "Todays Weight", :class => "form-control" %>
+            <div class="input-group-append">
+              <%= f.submit "Submit Weight", :class => "btn btn-success" %>
+            </div>
+          </div>
+          <% end %>
+        <% end %>
+      </div>
+    </div>
     <div class="row rounded-top pb-3 pt-3 mx-auto bg-primary text-light text-center">
       <div class="col-4">
         <h3>Calories In</h3>
