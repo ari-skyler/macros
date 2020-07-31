@@ -2,6 +2,9 @@
   <div class="col text-light p-2">
     <h1>Exercises</h1>
   </div>
+  <div class="col p-2 my-auto text-right">
+    <a href="/exercises/new" class="btn btn-light my-auto">Create New Exercise</a>
+  </div>
 </div>
 <div class="row bg-light border border-top-0 border-bottom-0 border-primary py-3">
   <div class="col">
@@ -20,8 +23,8 @@
             <p> <%= x.calories_burned %> cal <%= x.time_based ? "per min" : " per rep" %> </p>
         </div>
         <div class="card-footer">
-          <%= link_to("Permanently Delete", "/exercises/#{x.id}", method: 'delete', :class => "text-danger") %>
-          <!-- < %= link_to("Update", "/meals/#{m.id}/edit", :class => "text-primary") % > -->
+          <%= link_to("Permanently Delete", "/exercises/#{x.id}", method: 'delete', :class => "text-danger") %> <br>
+          <%= link_to("Edit Exercise", "/exercises/#{x.id}/edit", :class => "text-primary") %>
         </div>
       </div>
     </div>

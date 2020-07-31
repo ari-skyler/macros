@@ -9,15 +9,27 @@ class ExercisesController < ApplicationController
 
   def create
     @exercise = Exercise.new(exercise_params)
-    day = Day.find(exercise_params[:workouts_attributes]["0"][:day_id])
+    day = Day.find(exercise_params[:workouts_attributes]["0"][:day_id]) if exercise_params[:workouts_attributes]
     if @exercise.valid?
       @exercise.save
-      redirect_to '/days/' + day.date
+      redirect_to '/days/' + day.date if exercise_params[:workouts_attributes]
+      redirect_to exercises_path
     else
       render :new
     end
   end
-
+  def edit
+    @exercise = Exercise.find(params[:id])
+  end
+  def update
+    @exercise = Exercise.new(exercise_params)
+    if @exercise.valid?
+      @exercise.save
+      redirect_to exercises_path
+    else
+      render :edit
+    end
+  end
   def destroy
     Exercise.destroy(params[:id])
     redirect_to exercises_path
