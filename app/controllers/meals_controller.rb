@@ -28,6 +28,16 @@ class MealsController < ApplicationController
     end
   end
 
+  def edit
+    @meal = Meal.find(params[:id])
+    @ingredients = Ingredient.all
+    @post_url = "/meals/#{params[:id]}"
+  end
+
+  def destroy
+    Meal.destroy(params[:id])
+    redirect_to meals_path
+  end
 
   private
     def meal_params

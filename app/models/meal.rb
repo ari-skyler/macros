@@ -3,12 +3,12 @@ class Meal < ApplicationRecord
   has_many :ingredients_meals, inverse_of: :meal
   has_many :ingredients, through: :ingredients_meals
   has_many :days_meals
-  has_many :days, through: :days_meals
+  has_many :days, through: :days_meals, dependent: :destroy
 
   accepts_nested_attributes_for :ingredients_meals
 
   validates :name, presence: true
-  
+
   attr_accessor :nutrition, :ingredients_list
 
   def ingredients_list

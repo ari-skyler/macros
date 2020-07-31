@@ -23,9 +23,12 @@ Rails.application.routes.draw do
   resources :ingredients, only: [:create]
 
   resources :meals, only: [:new, :index]
-  post '/days/:date/days_meals', to: 'days_meals#create'
   get '/days/:date/meals/new', to: 'meals#new'
   post '/days/:date/meals', to: 'meals#create'
+  get '/meals/:id/edit', to: 'meals#edit'
+  patch '/meals/:id', to: 'meals#update'
+  delete 'meals/:id', to: 'meals#destroy'
+  post '/days/:date/days_meals', to: 'days_meals#create'
   delete '/days/:date/meals/:meal_id', to: 'days_meals#destroy'
 
   # For details on the DSL available within this file, see http://guides.rubyonrails.org/routing.html

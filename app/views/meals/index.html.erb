@@ -1,0 +1,86 @@
+<div class="row bg-primary rounded-top">
+  <div class="col text-light p-2">
+    <h1>Your Meals</h1>
+  </div>
+</div>
+<div class="row bg-light rounded-bottom border border-top-0 border-primary mb-3">
+  <% @meals.each_with_index do |m, index_1| %>
+    <div class="col-xs-12 col-md-4 col-lg-3 pb-3 px-2 mt-3">
+      <div class="card border-primary bg-light mb-3 h-100">
+        <div class="card-header">
+          <h3><%= m.name %></h3>
+          <p><b><%= m.nutrition[:calories] %> Cal</b></p>
+        </div>
+        <div class="card-body">
+          <% m.ingredients_list.each_with_index do |i, index_2| %>
+            <h4><%= pluralize i.servings, i.name %><br></h4>
+            <div class="w-75 mx-auto d-none" id="nutri-<%= index_1 %>-<%= index_2 %>">
+              <div class="row bg-dark text-light rounded-top">
+                <div class="col">
+                  <b><%= i.calories %> Cal</b>
+                </div>
+              </div>
+              <div class="row bg-white border border-top-0 border-dark">
+                <div class="col">
+                  <b>Protein:</b>
+                </div>
+                <div class="col text-right">
+                  <b><%= i.protein %> g</b>
+                </div>
+              </div>
+              <div class="row bg-white border border-top-0 border-dark">
+                <div class="col">
+                  <b>Fat:</b>
+                </div>
+                <div class="col text-right">
+                  <b><%= i.fat %> g</b>
+                </div>
+              </div>
+              <div class="row bg-white border border-top-0 border-dark">
+                <div class="col">
+                  <b>Carbs:</b>
+                </div>
+                <div class="col text-right">
+                  <b><%= i.carbs %> g</b>
+                </div>
+              </div>
+              <div class="row bg-white border border-top-0 border-dark">
+                <div class="col">
+                  <b>Fiber:</b>
+                </div>
+                <div class="col text-right">
+                  <b><%= i.fiber %> g</b>
+                </div>
+              </div>
+              <div class="row bg-white border border-top-0 border-dark rounded-bottom">
+                <div class="col">
+                  <b>Sugar:</b>
+                </div>
+                <div class="col text-right">
+                  <b><%= i.sugar %> g</b>
+                </div>
+              </div>
+            </div>
+            <button type="button" class="btn btn-link" id="btn-<%= index_1 %>-<%= index_2 %>" onclick="showHide('nutri-<%= index_1 %>-<%= index_2 %>')" name="button">Show More</button>
+          <% end %>
+        </div>
+        <div class="card-footer">
+          <%= link_to("Delete", "/meals/#{m.id}", method: 'delete', :class => "text-danger") %> | 
+          <%= link_to("Update", "/meals/#{m.id}/edit", :class => "text-primary") %>
+        </div>
+      </div>
+    </div>
+  <% end %>
+</div>
+
+<script type="text/javascript">
+  function showHide(id) {
+    var el = document.getElementById(id)
+    el.classList.toggle('d-none')
+    if (id != "add-meal" && id != "add-workout"){
+      var btn = document.getElementById(id.replace("nutri-", "btn-"))
+      if (btn.innerText == "Show Less") btn.innerText = "Show More"
+      else btn.innerText = "Show Less"
+    }
+  }
+</script>
