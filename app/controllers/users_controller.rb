@@ -9,7 +9,7 @@ class UsersController < ApplicationController
   end
   def create
     @user = User.new(user_params)
-    if @user.valid?(:setup)
+    if @user.valid?
       redirect_to '/dashboard'
     else
       render :new
@@ -18,7 +18,7 @@ class UsersController < ApplicationController
   def update
     @user = current_user
     @user.assign_attributes(user_params)
-    if @user.valid?
+    if @user.valid?(:setup)
       @user.setup = true
       @user.save
       redirect_to '/dashboard'
