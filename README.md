@@ -1,24 +1,44 @@
-# README
+# Rails Diet and Fitness Tracker
 
-This README would normally document whatever steps are necessary to get the
-application up and running.
+This is a rails app for tracking diet and fitness daily. Follow the directions to get it running.
 
-Things you may want to cover:
+## Getting Started
 
-* Ruby version
+These instructions will get you a copy of the project up and running on your local machine for development and testing purposes. See deployment for notes on how to deploy the project on a live system.
 
-* System dependencies
+### Installing
 
-* Configuration
+First run bundle to install the dependencies and gems:
+`bundle install`
 
-* Database creation
+Then create a .ENV file with the following information to get the google OmniAuth to work:
+`GOOGLE_CLIENT_ID=YOUR_CLIENT_ID
+GOOGLE_SECRET=YOUR_SECRET`
 
-* Database initialization
+Then set up the database:
+`rails db:migrate`
 
-* How to run the test suite
+Then start the server:
+`rails s`
 
-* Services (job queues, cache servers, search engines, etc.)
+If you want to play around with some sample data, check out the seed file in the db folder. It will create 30 days of sample data that will let you visualize what the tracker looks like.
 
-* Deployment instructions
+## Built With
 
-* ...
+* [Rails](https://rubyonrails.org/) - The web framework used
+* [Bootstrap](https://getbootstrap.com/) - For the layouts
+* [Chartkick](https://chartkick.com/) - To make the charting easy as cake
+* [Highcharts](https://www.highcharts.com/) - the charting engine
+
+
+## Authors
+
+**Aaron Schuyler**
+
+## License
+
+This project is licensed under the MIT License - see the [LICENSE.md](LICENSE.md) file for details
+
+## Acknowledgments
+
+* Thanks to my fellow flatiron students for pointing me in the right direction on a few things.

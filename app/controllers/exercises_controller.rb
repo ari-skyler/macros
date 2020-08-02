@@ -12,8 +12,11 @@ class ExercisesController < ApplicationController
     day = Day.find(exercise_params[:workouts_attributes]["0"][:day_id]) if exercise_params[:workouts_attributes]
     if @exercise.valid?
       @exercise.save
-      redirect_to '/days/' + day.date if exercise_params[:workouts_attributes]
-      redirect_to exercises_path
+      if exercise_params[:workouts_attributes]
+        redirect_to "/days/#{day.date}"
+      else
+        redirect_to exercises_path
+      end
     else
       render :new
     end
