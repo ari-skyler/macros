@@ -1,7 +1,7 @@
 class MealsController < ApplicationController
 
   def index
-    @meals = current_user.meals
+    @meals = User.find(params[:id]).meals
   end
 
   def new

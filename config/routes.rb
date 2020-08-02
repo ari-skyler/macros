@@ -25,7 +25,8 @@ Rails.application.routes.draw do
 
   delete '/meals/:meal_id/ingredients/:ingredient_id', to: 'ingredients_meals#destroy'
 
-  resources :meals, only: [:new, :index]
+  resources :meals, only: [:new]
+  get 'users/:id/meals', to: 'meals#index'
   get '/days/:date/meals/new', to: 'meals#new'
   post '/days/:date/meals', to: 'meals#create'
   get '/meals/:id/edit', to: 'meals#edit'

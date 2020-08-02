@@ -4,8 +4,6 @@ class ApplicationController < ActionController::Base
 
   private
   def check_setup_status
-    if current_user && !current_user.setup
-      redirect_to '/setup'
-    end
+    redirect_to '/setup' if current_user && !current_user.setup
   end
 end

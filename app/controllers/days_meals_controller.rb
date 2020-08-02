@@ -5,16 +5,15 @@ class DaysMealsController < ApplicationController
     days_meal.day = Day.find_by(date: params[:date], user:current_user)
     if days_meal.valid?
       days_meal.save
-      redirect_to '/days/' + params[:date]
-    else
-      redirect_to '/days/' + params[:date]
     end
+    "/days/#{params[:date]}"
   end
+
   def destroy
     day = Day.find_by(date: params[:date], user: current_user)
     meal = Meal.find(params[:meal_id])
     day.meals.delete(meal.id)
-    redirect_to '/days/' + params[:date]
+    redirect_to "/days/#{params[:date]}"
   end
   private
 

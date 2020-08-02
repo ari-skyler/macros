@@ -1,5 +1,6 @@
 class DaysController < ApplicationController
   before_action :check_credentials
+  
   def index
     overview = Day.thirty_day_overview(current_user)
     @days_calories = overview[:days_calories]
