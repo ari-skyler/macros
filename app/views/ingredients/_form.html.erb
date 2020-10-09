@@ -1,10 +1,6 @@
 <div class="card-body">
-  <% ingredient.errors.full_messages.each do |msg| %>
-    <div class="alert alert-danger">
-      <%= msg %>
-    </div>
-  <% end %>
-  <%= form_for ingredient do |f| %>
+  <%= render partial: "layouts/errors", locals: {obj: @ingredient} %>
+  <%= form_for @ingredient do |f| %>
     <div class="form-group">
       <%= f.text_field :name, :placeholder => "Ingredient Name", :class => "form-control" %>
     </div>

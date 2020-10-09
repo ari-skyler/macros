@@ -1,6 +1,10 @@
 class IngredientsController < ApplicationController
   def index
-    @ingredients = Ingredient.all
+    if !!params[:search]
+      @ingredients = Ingredient.where("name LIKE ?", "%#{params[:search]}%")
+    else
+      @ingredients = Ingredient.all
+    end
   end
   def new
     @ingredient = Ingredient.new
